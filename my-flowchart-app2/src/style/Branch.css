@@ -1,0 +1,23 @@
+#branch-box {
+  width: 300px;
+  height: 100px;
+  position: relative;
+  margin: 0 0 0 20px;
+}
+
+#branch {
+  font-size: small;
+  width: 140px;
+  height: 140px;
+  position: absolute;
+  top: -5px;
+  left: 80px;
+  transform: rotate(45deg) skew(-27deg, -27deg); /* 関数同士はスペースで空ける */
+}
+
+#branch-text-box {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  transform: skew(25deg, 25deg) rotate(-45deg); /* 傾き・回転をリセット */
+}

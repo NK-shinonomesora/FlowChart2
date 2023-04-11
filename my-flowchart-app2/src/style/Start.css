@@ -1,0 +1,9 @@
+#start {
+  width: 250px;
+  height: 100px;
+  margin: 0 10px 0 20px;
+}
+
+#start-text-box {
+  font-size: small;
+}

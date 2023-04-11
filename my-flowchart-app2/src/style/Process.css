@@ -1,0 +1,10 @@
+#process {
+  width: 250px;
+  height: 100px;
+  margin: 0 10px 0 20px;
+}
+
+#process-text-box {
+  font-size: small;
+  overflow-wrap:  break-word;
+}
