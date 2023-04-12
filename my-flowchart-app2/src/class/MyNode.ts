@@ -1,6 +1,8 @@
 import { Color } from "../enum/Color";
+import { v4 as uuidv4 } from 'uuid';
 
 export default abstract class MyNode {
+  private id: string;
   private parent: MyNode | null;
   private child: MyNode | null = null;
   private text: string;
@@ -8,9 +10,14 @@ export default abstract class MyNode {
   private status: "created" | "notCreated";
 
   constructor(parent: MyNode | null, text: string) {
+    this.id = uuidv4();
     this.parent = parent;
     this.text = text;
     this.status = "notCreated";
+  }
+
+  public getId() {
+    return this.id;
   }
 
   public getText() {
@@ -31,6 +38,10 @@ export default abstract class MyNode {
 
   public getStatus() {
     return this.status;
+  }
+
+  public setId(id: string) {
+    this.id = id;
   }
 
   public setText(text: string) {

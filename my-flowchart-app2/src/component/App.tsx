@@ -18,7 +18,8 @@ const App: React.FC = () => {
     setBranch2,
     openModal,
     showLinkNodes,
-    unShowLinkNodes
+    unShowLinkNodes,
+    linkNodes,
   } = CustomHook();
 
   return (
@@ -46,9 +47,30 @@ const App: React.FC = () => {
       {
         nodes.map((node, i) => (
           <div
+            draggable="true"
             onClick={() => openModal(node)}
             onMouseOver={() => showLinkNodes(node)}
             onMouseLeave={() => unShowLinkNodes(node)}
+            onDragStart={(e) => e.dataTransfer.setData('text/plain', node.getId())}
+            onDragOver={(e) => {
+              e.preventDefault();
+              e.dataTransfer.dropEffect = 'copy';
+            }}
+            onDrop={(e) => {
+              e.preventDefault();
+              if (e.dataTransfer.items) {
+                for (const item of e.dataTransfer.items) {
+                  const { kind, type } = item
+                  if (kind === 'file') {
+                    // Do nothing - item is file
+                  } else if (kind === 'string') {
+                    if (type === 'text/plain') {
+                      linkNodes(e.dataTransfer.getData(type), node);
+                    }
+                  }
+                }
+              }
+            }}
           >
             {
               node.displayShape()

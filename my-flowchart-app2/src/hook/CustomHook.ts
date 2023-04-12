@@ -34,7 +34,13 @@ const CustomHook = () => {
   const openModal = (node: MyNode) => {
     if(node.getStatus() === "created") return;
     setParentNode(node);
-    node instanceof BranchNode ? setIsOpen2(true) : setIsOpen(true);
+    if(node instanceof BranchNode) {
+      //linkを1つでも張っていたらNodeは作成できないこととする。
+      if(node.getChild() !== null) return;
+      setIsOpen2(true);
+    } else {
+      setIsOpen(true);
+    }
   }
   
   const closeModal = () => {
@@ -123,6 +129,43 @@ const CustomHook = () => {
     setNodes(nodes.concat());
   }
 
+  const linkNodes = (id: string, targetNode: MyNode) => {
+    const node = getNodeById(id);
+    if(node.getStatus() === "created") {
+      //もし自分自身にドロップしたら子Nodeをnullにする
+      if(targetNode.getId() === id) {
+        node.setChild(null);
+        node.setStatus("notCreated");
+        if(node instanceof BranchNode) node.setChild2(null);
+        return;
+      } else {
+        return;
+      }
+    } 
+    if(node instanceof ProcessNode) {
+      node.setChild(targetNode);
+      node.setStatus("created");
+    } else if(node instanceof BranchNode) {
+      if(node.getChild() === null) {
+        node.setChild(targetNode);
+      } else {
+        node.setChild2(targetNode);
+        node.setStatus("created");
+      }
+    }
+  }
+
+  const getNodeById = (id: string) => {
+    let node: MyNode;
+    for(let i = 0; i < nodes.length; i++) {
+      if(nodes[i].getId() === id) {
+        node = nodes[i];
+        break;
+      }
+    }
+    return node;
+  }
+
   return {
     nodes,
     createNode,
@@ -137,7 +180,8 @@ const CustomHook = () => {
     wrapSetNodeText,
     wrapSetNodeText2,
     showLinkNodes,
-    unShowLinkNodes
+    unShowLinkNodes,
+    linkNodes,
   }
 }
 
