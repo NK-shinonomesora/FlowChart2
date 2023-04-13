@@ -16,6 +16,8 @@ const CustomHook = () => {
   const [modalIsOpen4, setIsOpen4] = useState(false);
   const [nodeText, setNodeText] = useState<string>("");
   const [nodeText2, setNodeText2] = useState<string>("");
+  const [detail, setDetail] = useState<string>("");
+  const [detail2, setDetail2] = useState<string>("");
   const [whichNode, setWhichNode] = useState<"process" | "branch" | "noCheck">("noCheck");
   const [whichNode2, setWhichNode2] = useState<"process" | "branch" | "noCheck">("noCheck");
   const [yesOrNo, setYesOrNo] = useState<"yes" | "no" | "noCheck">("noCheck");
@@ -111,9 +113,17 @@ const CustomHook = () => {
     setDisplayedNode(node);
   }
 
+  const wrapSetDetail = (detail: string) => {
+    setDetail(detail);
+  }
+
+  const wrapSetDetail2 = (detail: string) => {
+    setDetail2(detail);
+  }
+
   const createNode = () => {
     const newNode = whichNode === "process"
-    ? ProcessNode.createNode(parentNode, nodeText)
+    ? ProcessNode.createNode(parentNode, nodeText, detail)
     : BranchNode.createNode(parentNode, nodeText);
     setNodes(nodes.concat(newNode));
     return newNode;
@@ -124,14 +134,14 @@ const CustomHook = () => {
     let newNode2: MyNode | null;
     if(whichNode !== "noCheck") {
       newNode = whichNode === "process"
-      ? ProcessNode.createNode(parentNode, nodeText) 
+      ? ProcessNode.createNode(parentNode, nodeText, detail) 
       : BranchNode.createNode(parentNode, nodeText);
     } else {
       newNode = null;
     }
     if(whichNode2 !== "noCheck") {
       newNode2 = whichNode2 === "process"
-      ? ProcessNode.createNode(parentNode, nodeText2) 
+      ? ProcessNode.createNode(parentNode, nodeText2, detail2) 
       : BranchNode.createNode(parentNode, nodeText2);
     } else {
       newNode2 = null;
@@ -256,6 +266,8 @@ const CustomHook = () => {
     closeModal4,
     wrapSetNodeText,
     wrapSetNodeText2,
+    wrapSetDetail,
+    wrapSetDetail2,
     showLinkNodes,
     unShowLinkNodes,
     linkNodes,
@@ -264,6 +276,8 @@ const CustomHook = () => {
     parentNode,
     setYes,
     setNo,
+    whichNode,
+    whichNode2,
   }
 }
 

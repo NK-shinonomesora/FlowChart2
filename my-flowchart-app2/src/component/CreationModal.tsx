@@ -9,6 +9,8 @@ interface CreationModalProp {
   wrapSetNodeText: (text: string) => void
   setProcess: () => void
   setBranch: () => void
+  wrapSetDetail: (detail: string) => void
+  whichNode: "process" | "branch" | "noCheck";
 }
 
 const CreationModal: React.FC<CreationModalProp> = (
@@ -17,7 +19,9 @@ const CreationModal: React.FC<CreationModalProp> = (
     closeModal,
     wrapSetNodeText,
     setProcess,
-    setBranch
+    setBranch,
+    wrapSetDetail,
+    whichNode,
   }
 ) => {
   return (
@@ -27,14 +31,6 @@ const CreationModal: React.FC<CreationModalProp> = (
         onRequestClose={() => closeModal()}
         contentLabel="Node作成"
       >
-        <div>
-          <input
-            type="text"
-            placeholder="フローの内容を入力してください。"
-            onChange={(e) => wrapSetNodeText(e.target.value)}
-          >
-          </input>
-        </div>
         <div>
           <h3>作成したいノードは?</h3>
           <span>処理ノード</span>
@@ -52,6 +48,25 @@ const CreationModal: React.FC<CreationModalProp> = (
           >
           </input>
         </div>
+        <div>
+          <input
+            type="text"
+            placeholder="フローの内容を入力してください。"
+            onChange={(e) => wrapSetNodeText(e.target.value)}
+          >
+          </input>
+        </div>
+        {
+          whichNode === "process"
+          &&
+          <div>
+            <textarea
+              placeholder="フローの詳細を記載する場合はここへ。"
+              onChange={(e) => wrapSetDetail(e.target.value)}
+            >
+            </textarea>
+          </div>
+        }
         <div>
           <button onClick={() => closeModal()}>close</button>
         </div>

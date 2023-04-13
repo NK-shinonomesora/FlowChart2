@@ -32,6 +32,10 @@ const App: React.FC = () => {
     parentNode,
     setYes,
     setNo,
+    wrapSetDetail,
+    wrapSetDetail2,
+    whichNode,
+    whichNode2,
   } = CustomHook();
 
   return (
@@ -43,6 +47,8 @@ const App: React.FC = () => {
         wrapSetNodeText={wrapSetNodeText}
         setProcess={setProcess}
         setBranch={setBranch}
+        wrapSetDetail={wrapSetDetail}
+        whichNode={whichNode}
       />
       <CreationModal2
         modalIsOpen2={ modalIsOpen2 }
@@ -54,6 +60,10 @@ const App: React.FC = () => {
         setProcess2={setProcess2}
         setBranch2={setBranch2}
         parentNode={parentNode}
+        wrapSetDetail={wrapSetDetail}
+        whichNode={whichNode}
+        wrapSetDetail2={wrapSetDetail2}
+        whichNode2={whichNode2}
       />
       <ConfirmFlowModal 
         modalIsOpen3={modalIsOpen3}
