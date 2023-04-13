@@ -1,5 +1,7 @@
 import React from "react";
 import Modal from 'react-modal';
+import MyNode from "../class/MyNode";
+import BranchNode from "../class/BranchNode";
 
 Modal.setAppElement(document.getElementById("root"));
 
@@ -12,6 +14,7 @@ interface CreationModal2Prop {
   wrapSetNodeText2: (text: string) => void
   setProcess2: () => void
   setBranch2: () => void
+  parentNode: MyNode
 }
 
 const CreationModal2: React.FC<CreationModal2Prop> = (
@@ -24,6 +27,7 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
     wrapSetNodeText2,
     setProcess2,
     setBranch2,
+    parentNode,
   }
 ) => {
   return (
@@ -33,58 +37,70 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
         onRequestClose={() => closeModal()}
         contentLabel="Node作成"
       >
-        <h1>Yes側ノードについて</h1>
-        <div>
-          <input
-            type="text"
-            placeholder="フローの内容を入力してください。"
-            onChange={(e) => wrapSetNodeText(e.target.value)}
-          >
-          </input>
-        </div>
-        <div>
-          <h3>作成したいノードは?</h3>
-          <span>処理ノード</span>
-          <input
-            type="radio"
-            name="node"
-            onClick={() => setProcess()}
-          >
-          </input>
-          <span>分岐ノード</span>
-          <input
-            type="radio"
-            name="node"
-            onClick={() => setBranch()}
-          >
-          </input>
-        </div>
-        <h1>No側ノードについて</h1>
-        <div>
-          <input
-            type="text"
-            placeholder="フローの内容を入力してください。"
-            onChange={(e) => wrapSetNodeText2(e.target.value)}
-          >
-          </input>
-        </div>
-        <div>
-          <h3>作成したいノードは?</h3>
-          <span>処理ノード</span>
-          <input
-            type="radio"
-            name="node2"
-            onClick={() => setProcess2()}
-          >
-          </input>
-          <span>分岐ノード</span>
-          <input
-            type="radio"
-            name="node2"
-            onClick={() => setBranch2()}
-          >
-          </input>
-        </div>
+        {
+          (parentNode !== undefined && parentNode.getChild() === null)
+          &&
+          <>
+          <h1>Yes側ノードについて</h1>
+          <div>
+            <input
+              type="text"
+              placeholder="フローの内容を入力してください。"
+              onChange={(e) => wrapSetNodeText(e.target.value)}
+            >
+            </input>
+          </div>
+          <div>
+            <h3>作成したいノードは?</h3>
+            <span>処理ノード</span>
+            <input
+              type="radio"
+              name="node"
+              onClick={() => setProcess()}
+            >
+            </input>
+            <span>分岐ノード</span>
+            <input
+              type="radio"
+              name="node"
+              onClick={() => setBranch()}
+            >
+            </input>
+          </div>
+          </>
+        }
+        {
+          (parentNode !== undefined && parentNode instanceof BranchNode && (parentNode as BranchNode).getChild2() === null)
+          &&
+          <>
+          <h1>No側ノードについて</h1>
+          <div>
+            <input
+              type="text"
+              placeholder="フローの内容を入力してください。"
+              onChange={(e) => wrapSetNodeText2(e.target.value)}
+            >
+            </input>
+          </div>
+          <div>
+            <h3>作成したいノードは?</h3>
+            <span>処理ノード</span>
+            <input
+              type="radio"
+              name="node2"
+              onClick={() => setProcess2()}
+            >
+            </input>
+            <span>分岐ノード</span>
+            <input
+              type="radio"
+              name="node2"
+              onClick={() => setBranch2()}
+            >
+            </input>
+          </div>
+          </>
+        }
         <div>
           <button onClick={() => closeModal()}>close</button>
         </div>

@@ -63,6 +63,12 @@ export default abstract class MyNode {
   public setStatus(status: "created" | "notCreated") {
     this.status = status;
   }
+
+  public static getStartNode(node: MyNode) {
+    let n: MyNode;
+    for(n = node; n.getParent() !== null; n = n.getParent()){}
+    return n;
+  }
   
   public abstract displayShape(): JSX.Element;
 }
