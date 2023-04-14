@@ -16,4 +16,11 @@ export default class StartNode extends MyNode {
   public static createNode(parent: null, text: string): MyNode {
     return new StartNode(parent, text);
   }
+
+  public static restoreNode(nodeInfo: NodePropertyAfterSavedToDB) {
+    const node = new StartNode(null, nodeInfo.text);
+    node.setId(nodeInfo.id);
+    node.setStatus(nodeInfo.status);
+    return node;
+  }
 }

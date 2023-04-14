@@ -27,4 +27,11 @@ export default class ProcessNode extends MyNode {
   public static createNode(parent: MyNode, text: string, detail: string): MyNode {
     return new ProcessNode(parent, text, detail);
   }
+
+  public static restoreNode(nodeInfo: NodePropertyAfterSavedToDB, parent: MyNode) {
+    const node = new ProcessNode(parent, nodeInfo.text, nodeInfo.detail);
+    node.setId(nodeInfo.id);
+    node.setStatus(nodeInfo.status);
+    return node;
+  }
 }

@@ -19,6 +19,7 @@ const CustomHook = () => {
   const [detail, setDetail] = useState<string>("");
   const [detail2, setDetail2] = useState<string>("");
   const [title, setTitle] = useState<string>("");
+  const [titleId, setTitleId] = useState<string>("");
   const [whichNode, setWhichNode] = useState<"process" | "branch" | "noCheck">("noCheck");
   const [whichNode2, setWhichNode2] = useState<"process" | "branch" | "noCheck">("noCheck");
   const [yesOrNo, setYesOrNo] = useState<"yes" | "no" | "noCheck">("noCheck");
@@ -58,6 +59,7 @@ const CustomHook = () => {
   }
 
   const openModal3 = () => {
+    setDisplayedNode(nodes[0]);
     setIsOpen3(true);
   }
 
@@ -124,6 +126,10 @@ const CustomHook = () => {
 
   const wrapSetTitle = (title: string) => {
     setTitle(title);
+  }
+
+  const wrapSetTitleId = (id: string) => {
+    setTitleId(id);
   }
 
   const createNode = () => {
@@ -257,6 +263,91 @@ const CustomHook = () => {
     await window.myAPI.saveFlowChart(title, nodes);
   }
 
+  const findStartNode = (nodes: NodePropertyAfterSavedToDB[]) => {
+    let node: NodePropertyAfterSavedToDB;
+    for(let i = 0; i < nodes.length; i++) {
+      if(nodes[i].type === "start") {
+        node = nodes[i];
+        break;
+      }
+    }
+    return node;
+  }
+
+  const findNodeById = (id: string, newNodes: MyNode[]) => {
+    let node: MyNode | null = null;
+    for(let i = 0; i < newNodes.length; i++) {
+      if(newNodes[i].getId() === id) {
+        node = newNodes[i];
+        break;
+      }
+    }
+    return node;
+  }
+ 
+  const findNodeInfoById = (id: string, nodes: NodePropertyAfterSavedToDB[]) => {
+    let node: NodePropertyAfterSavedToDB;
+    for(let i = 0; i < nodes.length; i++) {
+      if(nodes[i].id === id) {
+        node = nodes[i];
+        break;
+      }
+    }
+    return node;
+  }
+
+  const restoreFlowChartByDFS = (id: string, nodes: NodePropertyAfterSavedToDB[], newNodes: MyNode[], usedIds: string[], parent: MyNode | null = null) => {
+    const findResult = findNodeById(id, newNodes)
+    if(findResult !== null) {
+      return findResult;
+    }
+    let newNode: MyNode;
+    const nodeInfo = findNodeInfoById(id, nodes);
+    if(nodeInfo.type === "start") {
+      newNode = StartNode.restoreNode(nodeInfo);
+      usedIds.push(nodeInfo.id);
+      newNodes.push(newNode);
+      if(nodeInfo.child !== "null") {
+        const childNode = restoreFlowChartByDFS(nodeInfo.child, nodes, newNodes, usedIds, newNode);
+        newNode.setChild(childNode);
+      }
+    } else if(nodeInfo.type === "process") {
+      newNode = ProcessNode.restoreNode(nodeInfo, parent);
+      usedIds.push(nodeInfo.id);
+      newNodes.push(newNode);
+      if(nodeInfo.child !== "null") {
+        const childNode = restoreFlowChartByDFS(nodeInfo.child, nodes, newNodes, usedIds, newNode);
+        newNode.setChild(childNode);
+      }
+    } else {
+      newNode = BranchNode.restoreNode(nodeInfo, parent);
+      usedIds.push(nodeInfo.id);
+      newNodes.push(newNode);
+      if(nodeInfo.child !== "null") {
+        const childNode = restoreFlowChartByDFS(nodeInfo.child, nodes, newNodes, usedIds, newNode);
+        newNode.setChild(childNode);
+      }
+      if(nodeInfo.child2 !== "null") {
+        const childNode2 = restoreFlowChartByDFS(nodeInfo.child2, nodes, newNodes, usedIds, newNode);
+        (newNode as BranchNode).setChild2(childNode2);
+      }
+    }
+
+    return newNode;
+  }
+
+  const restoreFlowChart = async () => {
+    if(titleId === "") return;
+    const restoredTitle = await window.myAPI.selectTitleById(titleId);
+    const restoredNodes = await window.myAPI.selectNodesByTitleId(titleId);
+    const startNode = findStartNode(restoredNodes);
+    let newNodes: MyNode[] = [];
+    let usedIds: string[] = [];
+    restoreFlowChartByDFS(startNode.id, restoredNodes, newNodes, usedIds);
+    setTitle(restoredTitle.title);
+    setNodes(newNodes);
+  }
+
   return {
     nodes,
     createNode,
@@ -278,17 +369,21 @@ const CustomHook = () => {
     wrapSetDetail,
     wrapSetDetail2,
     wrapSetTitle,
+    wrapSetDisplayedNode,
+    wrapSetTitleId,
     showLinkNodes,
     unShowLinkNodes,
     linkNodes,
     displayedNode,
-    wrapSetDisplayedNode,
     parentNode,
     setYes,
     setNo,
     whichNode,
     whichNode2,
     saveFlowChart,
+    restoreFlowChart,
+    titleId,
+    title,
   }
 }
 

@@ -7,7 +7,7 @@ export default class BranchNode extends MyNode {
   private child2: MyNode | null = null;
 
   constructor(parent: MyNode | null, text: string,) {
-    super(parent, text,  "branch");
+    super(parent, text, "branch");
     this.setColor(Color.Branch);
   }
 
@@ -25,5 +25,12 @@ export default class BranchNode extends MyNode {
 
   public static createNode(parent: MyNode, text: string): MyNode {
     return new BranchNode(parent, text);
+  }
+
+  public static restoreNode(nodeInfo: NodePropertyAfterSavedToDB, parent: MyNode) {
+    const node = new BranchNode(parent, nodeInfo.text);
+    node.setId(nodeInfo.id);
+    node.setStatus(nodeInfo.status);
+    return node;
   }
 }

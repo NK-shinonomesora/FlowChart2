@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import CustomHook from "../hook/CustomHook";
 import '../style/App.css';
 import CreationModal from "./CreationModal";
@@ -6,6 +6,7 @@ import CreationModal2 from "./CreationModal2";
 import ConfirmFlowModal from "./ConfirmFlowModal";
 import YesOrNoModal from "./YesOrNoModal";
 import Header from "./Header";
+import { useSearchParams } from "react-router-dom";
 
 const CreateFlowChart: React.FC = () => {
   const {
@@ -39,7 +40,22 @@ const CreateFlowChart: React.FC = () => {
     whichNode2,
     wrapSetTitle,
     saveFlowChart,
+    wrapSetTitleId,
+    restoreFlowChart,
+    titleId,
+    title,
   } = CustomHook();
+
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    wrapSetTitleId(searchParams.getAll("id").join());
+  }, []);
+
+  useEffect(() => {
+    restoreFlowChart();
+  }, [titleId]);
+
 
   return (
     <>
@@ -100,6 +116,7 @@ const CreateFlowChart: React.FC = () => {
       <input
         placeholder="タイトルを入力してください。"
         onChange={(e) => wrapSetTitle(e.target.value)}
+        defaultValue={title}
       >
       </input>
     </div>
@@ -107,6 +124,7 @@ const CreateFlowChart: React.FC = () => {
       {
         nodes.map((node, i) => (
           <div
+            key={i}
             draggable="true"
             onClick={() => openModal(node)}
             onMouseOver={() => showLinkNodes(node)}

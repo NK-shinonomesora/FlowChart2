@@ -38,7 +38,15 @@ export default class Table extends MyDatabase {
     }
   }
 
-  public async selectAllTitles() {
+  public async selectAllTitles(): Promise<Title[]> {
     return await this.dbAll(`SELECT * FROM title`);
+  }
+
+  public async selectTitleById(id: string): Promise<Title> {
+    return await this.dbGet(`SELECT * FROM title WHERE id = "${id}"`);
+  }
+
+  public async selectNodesByTitleId(titleId: string): Promise<NodePropertyAfterSavedToDB[]> {
+    return await this.dbAll(`SELECT id, text, detail, parent, child, child2, status, type FROM node WHERE title_id = "${titleId}"`);
   }
 }
