@@ -7,7 +7,7 @@ export default class ProcessNode extends MyNode {
   private detail: string;
 
   constructor(parent: MyNode | null, text: string, detail: string) {
-    super(parent, text);
+    super(parent, text, "process");
     this.detail = detail;
     this.setColor(Color.Process);
   }

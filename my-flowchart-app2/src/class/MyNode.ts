@@ -8,12 +8,14 @@ export default abstract class MyNode {
   private text: string;
   private color: Color;
   private status: "created" | "notCreated";
+  public readonly type: NodeType;
 
-  constructor(parent: MyNode | null, text: string) {
+  constructor(parent: MyNode | null, text: string, type: NodeType) {
     this.id = uuidv4();
     this.parent = parent;
     this.text = text;
     this.status = "notCreated";
+    this.type = type;
   }
 
   public getId() {

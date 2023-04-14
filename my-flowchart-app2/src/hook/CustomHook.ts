@@ -18,6 +18,7 @@ const CustomHook = () => {
   const [nodeText2, setNodeText2] = useState<string>("");
   const [detail, setDetail] = useState<string>("");
   const [detail2, setDetail2] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
   const [whichNode, setWhichNode] = useState<"process" | "branch" | "noCheck">("noCheck");
   const [whichNode2, setWhichNode2] = useState<"process" | "branch" | "noCheck">("noCheck");
   const [yesOrNo, setYesOrNo] = useState<"yes" | "no" | "noCheck">("noCheck");
@@ -119,6 +120,10 @@ const CustomHook = () => {
 
   const wrapSetDetail2 = (detail: string) => {
     setDetail2(detail);
+  }
+
+  const wrapSetTitle = (title: string) => {
+    setTitle(title);
   }
 
   const createNode = () => {
@@ -248,6 +253,10 @@ const CustomHook = () => {
     return node;
   }
 
+  const saveFlowChart = async () => {
+    await window.myAPI.saveFlowChart(title, nodes);
+  }
+
   return {
     nodes,
     createNode,
@@ -268,6 +277,7 @@ const CustomHook = () => {
     wrapSetNodeText2,
     wrapSetDetail,
     wrapSetDetail2,
+    wrapSetTitle,
     showLinkNodes,
     unShowLinkNodes,
     linkNodes,
@@ -278,6 +288,7 @@ const CustomHook = () => {
     setNo,
     whichNode,
     whichNode2,
+    saveFlowChart,
   }
 }
 

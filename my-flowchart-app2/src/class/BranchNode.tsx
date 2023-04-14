@@ -7,7 +7,7 @@ export default class BranchNode extends MyNode {
   private child2: MyNode | null = null;
 
   constructor(parent: MyNode | null, text: string,) {
-    super(parent, text);
+    super(parent, text,  "branch");
     this.setColor(Color.Branch);
   }
 
