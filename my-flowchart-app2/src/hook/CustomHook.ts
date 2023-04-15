@@ -260,7 +260,11 @@ const CustomHook = () => {
   }
 
   const saveFlowChart = async () => {
-    await window.myAPI.saveFlowChart(title, nodes);
+    if(titleId === "") {
+      await window.myAPI.saveFlowChart(title, nodes);
+    } else {
+      await window.myAPI.updateFlowChart(title, titleId, nodes);
+    }
   }
 
   const findStartNode = (nodes: NodePropertyAfterSavedToDB[]) => {
@@ -296,39 +300,34 @@ const CustomHook = () => {
     return node;
   }
 
-  const restoreFlowChartByDFS = (id: string, nodes: NodePropertyAfterSavedToDB[], newNodes: MyNode[], usedIds: string[], parent: MyNode | null = null) => {
+  const restoreFlowChartByDFS = (id: string, nodes: NodePropertyAfterSavedToDB[], newNodes: MyNode[], parent: MyNode | null = null) => {
     const findResult = findNodeById(id, newNodes)
-    if(findResult !== null) {
-      return findResult;
-    }
+    if(findResult !== null) return findResult;
     let newNode: MyNode;
     const nodeInfo = findNodeInfoById(id, nodes);
     if(nodeInfo.type === "start") {
       newNode = StartNode.restoreNode(nodeInfo);
-      usedIds.push(nodeInfo.id);
       newNodes.push(newNode);
       if(nodeInfo.child !== "null") {
-        const childNode = restoreFlowChartByDFS(nodeInfo.child, nodes, newNodes, usedIds, newNode);
+        const childNode = restoreFlowChartByDFS(nodeInfo.child, nodes, newNodes, newNode);
         newNode.setChild(childNode);
       }
     } else if(nodeInfo.type === "process") {
       newNode = ProcessNode.restoreNode(nodeInfo, parent);
-      usedIds.push(nodeInfo.id);
       newNodes.push(newNode);
       if(nodeInfo.child !== "null") {
-        const childNode = restoreFlowChartByDFS(nodeInfo.child, nodes, newNodes, usedIds, newNode);
+        const childNode = restoreFlowChartByDFS(nodeInfo.child, nodes, newNodes, newNode);
         newNode.setChild(childNode);
       }
     } else {
       newNode = BranchNode.restoreNode(nodeInfo, parent);
-      usedIds.push(nodeInfo.id);
       newNodes.push(newNode);
       if(nodeInfo.child !== "null") {
-        const childNode = restoreFlowChartByDFS(nodeInfo.child, nodes, newNodes, usedIds, newNode);
+        const childNode = restoreFlowChartByDFS(nodeInfo.child, nodes, newNodes, newNode);
         newNode.setChild(childNode);
       }
       if(nodeInfo.child2 !== "null") {
-        const childNode2 = restoreFlowChartByDFS(nodeInfo.child2, nodes, newNodes, usedIds, newNode);
+        const childNode2 = restoreFlowChartByDFS(nodeInfo.child2, nodes, newNodes, newNode);
         (newNode as BranchNode).setChild2(childNode2);
       }
     }
@@ -342,8 +341,7 @@ const CustomHook = () => {
     const restoredNodes = await window.myAPI.selectNodesByTitleId(titleId);
     const startNode = findStartNode(restoredNodes);
     let newNodes: MyNode[] = [];
-    let usedIds: string[] = [];
-    restoreFlowChartByDFS(startNode.id, restoredNodes, newNodes, usedIds);
+    restoreFlowChartByDFS(startNode.id, restoredNodes, newNodes);
     setTitle(restoredTitle.title);
     setNodes(newNodes);
   }

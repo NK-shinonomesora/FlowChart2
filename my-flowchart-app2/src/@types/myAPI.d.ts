@@ -3,6 +3,7 @@ interface MyAPI {
   selectAllTitles: () => Title[]
   selectTitleById: (id: string) => Title
   selectNodesByTitleId: (titleId: string) => NodePropertyAfterSavedToDB[]
+  updateFlowChart: (title: string, titleId: string, nodes: MyNode[]) => void
 }
 
 interface Window {
