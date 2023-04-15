@@ -8,12 +8,14 @@ import { Color } from "../enum/Color";
 const CustomHook = () => {
   const [nodes, setNodes] = useState<MyNode[]>([new StartNode(null, "開始")]);
   const [parentNode, setParentNode] = useState<MyNode>();
+  const [tempNode, setTempNode] = useState<MyNode>();
   const [displayedNode, setDisplayedNode] = useState<MyNode>(nodes[0]);
   const [saveNodes, setSaveNodes] = useState<MyNode[]>([]);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalIsOpen2, setIsOpen2] = useState(false);
   const [modalIsOpen3, setIsOpen3] = useState(false);
   const [modalIsOpen4, setIsOpen4] = useState(false);
+  const [modalIsOpen5, setIsOpen5] = useState(false);
   const [nodeText, setNodeText] = useState<string>("");
   const [nodeText2, setNodeText2] = useState<string>("");
   const [detail, setDetail] = useState<string>("");
@@ -66,6 +68,10 @@ const CustomHook = () => {
   const openModal4 = () => {
     setIsOpen4(true);
   }
+
+  const openModal5 = () => {
+    setIsOpen5(true);
+  }
   
   const closeModal = () => {
     const isBranch = parentNode instanceof BranchNode;
@@ -102,6 +108,13 @@ const CustomHook = () => {
       (node as BranchNode).setChild2(targetNode);
     }
     setIsOpen4(false);
+  }
+
+  const closeModal5 = () => {
+    setIsOpen5(false);
+    tempNode.setText(nodeText);
+    if(tempNode instanceof ProcessNode) tempNode.setDetail(detail);
+    setNodes(nodes.concat());
   }
 
   const wrapSetNodeText = (text: string) => {
@@ -346,6 +359,26 @@ const CustomHook = () => {
     setNodes(newNodes);
   }
 
+  const displayContextMenu = (i: string) => {
+    const elem = document.getElementById(`contextmenu${i}`);
+    elem.style.display === "none" ? elem.style.display = "block" : elem.style.display = "none";
+  }
+
+  const changeTextOfNode = (node: MyNode) => {
+    if(node instanceof StartNode) return;
+    setTempNode(node);
+    if(node instanceof ProcessNode) {
+      setNodeText(node.getText());
+      setDetail(node.getDetail());
+      setWhichNode("process");
+      openModal5();
+    } else {
+      setNodeText(node.getText());
+      setWhichNode("branch");
+      openModal5();
+    }
+  }
+
   return {
     nodes,
     createNode,
@@ -353,15 +386,18 @@ const CustomHook = () => {
     modalIsOpen2,
     modalIsOpen3,
     modalIsOpen4,
+    modalIsOpen5,
     setProcess,
     setProcess2,
     setBranch,
     setBranch2,
     openModal,
     openModal3,
+    openModal5,
     closeModal,
     closeModal3,
     closeModal4,
+    closeModal5,
     wrapSetNodeText,
     wrapSetNodeText2,
     wrapSetDetail,
@@ -382,6 +418,10 @@ const CustomHook = () => {
     restoreFlowChart,
     titleId,
     title,
+    displayContextMenu,
+    nodeText,
+    detail,
+    changeTextOfNode,
   }
 }
 

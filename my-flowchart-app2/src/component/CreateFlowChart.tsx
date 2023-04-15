@@ -1,10 +1,11 @@
 import React, { useEffect, useLayoutEffect } from "react";
 import CustomHook from "../hook/CustomHook";
-import '../style/App.css';
+import '../style/CreateFlowChart.css';
 import CreationModal from "./CreationModal";
 import CreationModal2 from "./CreationModal2";
 import ConfirmFlowModal from "./ConfirmFlowModal";
 import YesOrNoModal from "./YesOrNoModal";
+import ChangeTextOfNodeModal from "./ChangeTextOfNodeModal";
 import Header from "./Header";
 import { useSearchParams } from "react-router-dom";
 
@@ -15,9 +16,11 @@ const CreateFlowChart: React.FC = () => {
     modalIsOpen2,
     modalIsOpen3,
     modalIsOpen4,
+    modalIsOpen5,
     closeModal,
     closeModal3,
     closeModal4,
+    closeModal5,
     wrapSetNodeText,
     setProcess,
     setBranch,
@@ -26,6 +29,7 @@ const CreateFlowChart: React.FC = () => {
     setBranch2,
     openModal,
     openModal3,
+    openModal5,
     showLinkNodes,
     unShowLinkNodes,
     linkNodes,
@@ -44,6 +48,10 @@ const CreateFlowChart: React.FC = () => {
     restoreFlowChart,
     titleId,
     title,
+    displayContextMenu,
+    nodeText,
+    detail,
+    changeTextOfNode,
   } = CustomHook();
 
   const [searchParams] = useSearchParams();
@@ -97,6 +105,15 @@ const CreateFlowChart: React.FC = () => {
         setYes={setYes}
         setNo={setNo}
       />
+      <ChangeTextOfNodeModal
+        modalIsOpen5={ modalIsOpen5 }
+        closeModal5={ closeModal5 }
+        nodeText={nodeText}
+        detail={detail}
+        wrapSetNodeText={wrapSetNodeText}
+        wrapSetDetail={wrapSetDetail}
+        whichNode={whichNode}
+      />
     </div>
     <div>
       <button
@@ -124,9 +141,11 @@ const CreateFlowChart: React.FC = () => {
       {
         nodes.map((node, i) => (
           <div
+            id="event-box"
             key={i}
             draggable="true"
             onClick={() => openModal(node)}
+            onContextMenu={() => displayContextMenu(`${i}`)}
             onMouseOver={() => showLinkNodes(node)}
             onMouseLeave={() => unShowLinkNodes(node)}
             onDragStart={(e) => e.dataTransfer.setData('text/plain', node.getId())}
@@ -153,6 +172,17 @@ const CreateFlowChart: React.FC = () => {
             {
               node.displayShape()
             }
+            <div
+              style={{ display: "none" }}
+              id={`contextmenu${i}`}
+              className="contextmenu"
+            >
+              <ul>
+                  <li onClick={() => changeTextOfNode(node)}>menu1</li>
+                  <li onClick={() => console.log("menu2")}>menu2</li>
+                  <li>menu3</li>
+              </ul>
+            </div>
           </div>
         ))
       }
