@@ -16,6 +16,8 @@ const CustomHook = () => {
   const [modalIsOpen3, setIsOpen3] = useState(false);
   const [modalIsOpen4, setIsOpen4] = useState(false);
   const [modalIsOpen5, setIsOpen5] = useState(false);
+  const [modalIsOpen6, setIsOpen6] = useState(false);
+  const [modalIsOpen7, setIsOpen7] = useState(false);
   const [nodeText, setNodeText] = useState<string>("");
   const [nodeText2, setNodeText2] = useState<string>("");
   const [detail, setDetail] = useState<string>("");
@@ -25,6 +27,17 @@ const CustomHook = () => {
   const [whichNode, setWhichNode] = useState<"process" | "branch" | "noCheck">("noCheck");
   const [whichNode2, setWhichNode2] = useState<"process" | "branch" | "noCheck">("noCheck");
   const [yesOrNo, setYesOrNo] = useState<"yes" | "no" | "noCheck">("noCheck");
+  const [yesOrNo2, setYesOrNo2] = useState<"yes" | "no" | "noCheck">("noCheck");
+
+  const resetStates = () => {
+    setNodeText("");
+    setNodeText2("");
+    setDetail("");
+    setDetail2("");
+    setWhichNode("noCheck");
+    setWhichNode2("noCheck");
+    setYesOrNo("noCheck");
+  }
 
   const setProcess = () => {
     setWhichNode("process");
@@ -50,6 +63,14 @@ const CustomHook = () => {
     setYesOrNo("no");
   }
 
+  const setYes2 = () => {
+    setYesOrNo2("yes");
+  }
+
+  const setNo2 = () => {
+    setYesOrNo2("no");
+  }
+
   const openModal = (node: MyNode) => {
     if(node.getStatus() === "created") return;
     setParentNode(node);
@@ -72,6 +93,14 @@ const CustomHook = () => {
   const openModal5 = () => {
     setIsOpen5(true);
   }
+
+  const openModal6 = () => {
+    setIsOpen6(true);
+  }
+
+  const openModal7 = () => {
+    setIsOpen7(true);
+  }
   
   const closeModal = () => {
     const isBranch = parentNode instanceof BranchNode;
@@ -91,11 +120,13 @@ const CustomHook = () => {
       }
     }
     isBranch ? setIsOpen2(false) : setIsOpen(false);
+    resetStates();
   }
 
   const closeModal3 = () => {
     setDisplayedNode(nodes[0]);
     setIsOpen3(false);
+    resetStates();
   }
 
   const closeModal4 = () => {
@@ -108,6 +139,7 @@ const CustomHook = () => {
       (node as BranchNode).setChild2(targetNode);
     }
     setIsOpen4(false);
+    resetStates();
   }
 
   const closeModal5 = () => {
@@ -115,6 +147,74 @@ const CustomHook = () => {
     tempNode.setText(nodeText);
     if(tempNode instanceof ProcessNode) tempNode.setDetail(detail);
     setNodes(nodes.concat());
+    resetStates();
+  }
+
+  const closeModal6 = () => {
+    if(whichNode !== "noCheck") {
+      const newNode = createNode();
+      if(newNode instanceof ProcessNode) {
+        newNode.setChild(parentNode.getChild());
+        newNode.setStatus("created");
+        parentNode.setChild(newNode);
+        newNode.getChild().setParent(newNode);
+      } else {
+        if(yesOrNo === "yes") {
+          newNode.setChild(parentNode.getChild());
+          parentNode.setChild(newNode);
+          newNode.getChild().setParent(newNode);
+        } else {
+          (newNode as BranchNode).setChild2(parentNode.getChild());
+          parentNode.setChild(newNode);
+          (newNode as BranchNode).getChild2().setParent(newNode);
+        }
+      }
+    }
+    setIsOpen6(false);
+    resetStates();
+  }
+
+  const closeModal7 = () => {
+    if(whichNode !== "noCheck") {
+      const newNode = createNode();
+      if(newNode instanceof ProcessNode) {
+        if(yesOrNo2 === "yes") {
+          newNode.setChild(parentNode.getChild());
+          newNode.setStatus("created");
+          parentNode.setChild(newNode);
+          newNode.getChild().setParent(newNode);
+        } else {
+          newNode.setChild((parentNode as BranchNode).getChild2());
+          newNode.setStatus("created");
+          (parentNode as BranchNode).setChild2(newNode);
+          newNode.getChild().setParent(newNode);
+        }
+      } else {
+        if(yesOrNo2 === "yes") {
+          if(yesOrNo === "yes") {
+            newNode.setChild(parentNode.getChild());
+            parentNode.setChild(newNode);
+            newNode.getChild().setParent(newNode);
+          } else {
+            (newNode as BranchNode).setChild2(parentNode.getChild());
+            parentNode.setChild(newNode);
+            (newNode as BranchNode).getChild2().setParent(newNode);
+          }
+        } else {
+          if(yesOrNo === "yes") {
+            newNode.setChild((parentNode as BranchNode).getChild2());
+            (parentNode as BranchNode).setChild2(newNode);
+            newNode.getChild().setParent(newNode);
+          } else {
+            (newNode as BranchNode).setChild2((parentNode as BranchNode).getChild2());
+            (parentNode as BranchNode).setChild2(newNode);
+            (newNode as BranchNode).getChild2().setParent(newNode);
+          }
+        }
+      }
+    }
+    setIsOpen7(false);
+    resetStates();
   }
 
   const wrapSetNodeText = (text: string) => {
@@ -379,6 +479,15 @@ const CustomHook = () => {
     }
   }
 
+  const createNodeBetweenNodeAndNode = (node: MyNode) => {
+    setParentNode(node);
+    if(node instanceof ProcessNode) {
+      openModal6();
+    } else {
+      openModal7();
+    }
+  }
+
   return {
     nodes,
     createNode,
@@ -387,17 +496,20 @@ const CustomHook = () => {
     modalIsOpen3,
     modalIsOpen4,
     modalIsOpen5,
+    modalIsOpen6,
+    modalIsOpen7,
     setProcess,
     setProcess2,
     setBranch,
     setBranch2,
     openModal,
     openModal3,
-    openModal5,
     closeModal,
     closeModal3,
     closeModal4,
     closeModal5,
+    closeModal6,
+    closeModal7,
     wrapSetNodeText,
     wrapSetNodeText2,
     wrapSetDetail,
@@ -411,7 +523,9 @@ const CustomHook = () => {
     displayedNode,
     parentNode,
     setYes,
+    setYes2,
     setNo,
+    setNo2,
     whichNode,
     whichNode2,
     saveFlowChart,
@@ -422,6 +536,7 @@ const CustomHook = () => {
     nodeText,
     detail,
     changeTextOfNode,
+    createNodeBetweenNodeAndNode,
   }
 }
 

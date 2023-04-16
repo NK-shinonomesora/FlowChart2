@@ -3,6 +3,8 @@ import CustomHook from "../hook/CustomHook";
 import '../style/CreateFlowChart.css';
 import CreationModal from "./CreationModal";
 import CreationModal2 from "./CreationModal2";
+import CreationModal3 from "./CreationModal3";
+import CreationModal4 from "./CreationModal4";
 import ConfirmFlowModal from "./ConfirmFlowModal";
 import YesOrNoModal from "./YesOrNoModal";
 import ChangeTextOfNodeModal from "./ChangeTextOfNodeModal";
@@ -17,10 +19,14 @@ const CreateFlowChart: React.FC = () => {
     modalIsOpen3,
     modalIsOpen4,
     modalIsOpen5,
+    modalIsOpen6,
+    modalIsOpen7,
     closeModal,
     closeModal3,
     closeModal4,
     closeModal5,
+    closeModal6,
+    closeModal7,
     wrapSetNodeText,
     setProcess,
     setBranch,
@@ -29,7 +35,6 @@ const CreateFlowChart: React.FC = () => {
     setBranch2,
     openModal,
     openModal3,
-    openModal5,
     showLinkNodes,
     unShowLinkNodes,
     linkNodes,
@@ -37,7 +42,9 @@ const CreateFlowChart: React.FC = () => {
     wrapSetDisplayedNode,
     parentNode,
     setYes,
+    setYes2,
     setNo,
+    setNo2,
     wrapSetDetail,
     wrapSetDetail2,
     whichNode,
@@ -52,6 +59,7 @@ const CreateFlowChart: React.FC = () => {
     nodeText,
     detail,
     changeTextOfNode,
+    createNodeBetweenNodeAndNode,
   } = CustomHook();
 
   const [searchParams] = useSearchParams();
@@ -92,6 +100,30 @@ const CreateFlowChart: React.FC = () => {
         whichNode={whichNode}
         wrapSetDetail2={wrapSetDetail2}
         whichNode2={whichNode2}
+      />
+      <CreationModal3
+        modalIsOpen6={ modalIsOpen6 }
+        closeModal6={ closeModal6 }
+        wrapSetNodeText={wrapSetNodeText}
+        setProcess={setProcess}
+        setBranch={setBranch}
+        wrapSetDetail={wrapSetDetail}
+        whichNode={whichNode}
+        setYes={setYes}
+        setNo={setNo}
+      />
+      <CreationModal4
+        modalIsOpen7={ modalIsOpen7 }
+        closeModal7={ closeModal7 }
+        wrapSetNodeText={wrapSetNodeText}
+        setProcess={setProcess}
+        setBranch={setBranch}
+        wrapSetDetail={wrapSetDetail}
+        whichNode={whichNode}
+        setYes={setYes}
+        setNo={setNo}
+        setYes2={setYes2}
+        setNo2={setNo2}
       />
       <ConfirmFlowModal 
         modalIsOpen3={modalIsOpen3}
@@ -178,8 +210,14 @@ const CreateFlowChart: React.FC = () => {
               className="contextmenu"
             >
               <ul>
-                  <li onClick={() => changeTextOfNode(node)}>menu1</li>
-                  <li onClick={() => console.log("menu2")}>menu2</li>
+                  <li
+                    onClick={() => changeTextOfNode(node)}
+                  >テキストを変更する
+                  </li>
+                  <li
+                    onClick={(e) => node.getStatus() === "created" ? createNodeBetweenNodeAndNode(node) : e.stopPropagation()}
+                  >このノードと次のノードの間に新規作成する
+                  </li>
                   <li>menu3</li>
               </ul>
             </div>
