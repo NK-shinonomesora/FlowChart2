@@ -213,7 +213,11 @@ const CreateFlowChart: React.FC = () => {
             >
               <ul>
                   <li
-                    onClick={() => changeTextOfNode(node)}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        changeTextOfNode(node);
+                      }
+                    }
                   >テキストを変更する
                   </li>
                   <li
