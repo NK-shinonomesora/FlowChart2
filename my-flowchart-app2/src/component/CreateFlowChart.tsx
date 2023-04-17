@@ -215,17 +215,28 @@ const CreateFlowChart: React.FC = () => {
                   <li
                     onClick={(e) => {
                         e.stopPropagation();
+                        displayContextMenu(`${i}`);
                         changeTextOfNode(node);
                       }
                     }
                   >テキストを変更する
                   </li>
                   <li
-                    onClick={(e) => node.getStatus() === "created" ? createNodeBetweenNodeAndNode(node) : e.stopPropagation()}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        displayContextMenu(`${i}`);
+                        node.getStatus() === "created" && createNodeBetweenNodeAndNode(node);
+                      }
+                    }
                   >このノードと次のノードの間に新規作成する
                   </li>
                   <li
-                    onClick={(e) => node instanceof StartNode ? e.stopPropagation() : deleteNode(node)}
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        displayContextMenu(`${i}`);
+                        node instanceof StartNode === false && deleteNode(node);
+                      }
+                    }
                   >ノードを削除する
                   </li>
               </ul>
