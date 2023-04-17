@@ -488,6 +488,33 @@ const CustomHook = () => {
     }
   }
 
+  const deleteNodeByDFS = (node: MyNode, newNodes: MyNode[]) => {
+    const findResult = findNodeById(node.getId(), newNodes)
+    if(findResult !== null) return;
+    newNodes.push(node);
+    if(node.getChild() !== null) deleteNodeByDFS(node.getChild(), newNodes);
+    if(node instanceof BranchNode) {
+      if(node.getChild2() !== null) deleteNodeByDFS(node.getChild2(), newNodes);
+    }
+  }
+
+  const deleteNode = (node: MyNode) => {
+    const parentNode = node.getParent();
+    if(parentNode instanceof ProcessNode) {
+      parentNode.setChild(null);
+    } else {
+      if(parentNode.getChild() === node) {
+        parentNode.setChild(null)
+      } else {
+        (parentNode as BranchNode).setChild2(null);
+      }
+    }
+    parentNode.setStatus("notCreated");
+    let newNodes: MyNode[] = [];
+    deleteNodeByDFS(nodes[0], newNodes);
+    setNodes(newNodes);
+  }
+
   return {
     nodes,
     createNode,
@@ -537,6 +564,7 @@ const CustomHook = () => {
     detail,
     changeTextOfNode,
     createNodeBetweenNodeAndNode,
+    deleteNode,
   }
 }
 

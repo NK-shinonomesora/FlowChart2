@@ -10,6 +10,7 @@ import YesOrNoModal from "./YesOrNoModal";
 import ChangeTextOfNodeModal from "./ChangeTextOfNodeModal";
 import Header from "./Header";
 import { useSearchParams } from "react-router-dom";
+import StartNode from "../class/StartNode";
 
 const CreateFlowChart: React.FC = () => {
   const {
@@ -60,6 +61,7 @@ const CreateFlowChart: React.FC = () => {
     detail,
     changeTextOfNode,
     createNodeBetweenNodeAndNode,
+    deleteNode,
   } = CustomHook();
 
   const [searchParams] = useSearchParams();
@@ -218,7 +220,10 @@ const CreateFlowChart: React.FC = () => {
                     onClick={(e) => node.getStatus() === "created" ? createNodeBetweenNodeAndNode(node) : e.stopPropagation()}
                   >このノードと次のノードの間に新規作成する
                   </li>
-                  <li>menu3</li>
+                  <li
+                    onClick={(e) => node instanceof StartNode ? e.stopPropagation() : deleteNode(node)}
+                  >ノードを削除する
+                  </li>
               </ul>
             </div>
           </div>
