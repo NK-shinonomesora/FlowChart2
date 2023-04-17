@@ -332,16 +332,10 @@ const CustomHook = () => {
 
   const linkNodes = (id: string, targetNode: MyNode) => {
     const node = getNodeById(id);
+    //もし自分自身にドロップしたらすぐにreturn
+    if(targetNode.getId() === id) return;
     if(node.getStatus() === "created") {
-      //もし自分自身にドロップしたら子Nodeをnullにする
-      if(targetNode.getId() === id) {
-        node.setChild(null);
-        node.setStatus("notCreated");
-        if(node instanceof BranchNode) node.setChild2(null);
-        return;
-      } else {
-        return;
-      }
+      
     } 
     if(node instanceof ProcessNode) {
       node.setChild(targetNode);
