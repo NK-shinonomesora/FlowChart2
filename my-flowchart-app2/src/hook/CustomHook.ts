@@ -18,6 +18,7 @@ const CustomHook = () => {
   const [modalIsOpen5, setIsOpen5] = useState(false);
   const [modalIsOpen6, setIsOpen6] = useState(false);
   const [modalIsOpen7, setIsOpen7] = useState(false);
+  const [modalIsOpen8, setIsOpen8] = useState(false);
   const [nodeText, setNodeText] = useState<string>("");
   const [nodeText2, setNodeText2] = useState<string>("");
   const [detail, setDetail] = useState<string>("");
@@ -100,6 +101,10 @@ const CustomHook = () => {
 
   const openModal7 = () => {
     setIsOpen7(true);
+  }
+
+  const openModal8 = () => {
+    setIsOpen8(true);
   }
   
   const closeModal = () => {
@@ -214,6 +219,24 @@ const CustomHook = () => {
       }
     }
     setIsOpen7(false);
+    resetStates();
+  }
+
+  const closeModal8 = () => {
+    setIsOpen8(false);
+    const [node, targetNode] = saveNodes;
+    if(yesOrNo === "noCheck") {
+      return;
+    } else if(yesOrNo === "yes") {
+      node.setChild(targetNode);
+      targetNode.setParent(node);
+    } else {
+      (node as BranchNode).setChild2(targetNode);
+      targetNode.setParent(node);
+    }
+    let newNodes: MyNode[] = [];
+    deleteNodeByDFS(nodes[0], newNodes);
+    setNodes(newNodes);
     resetStates();
   }
 
@@ -335,22 +358,35 @@ const CustomHook = () => {
     //もし自分自身にドロップしたらすぐにreturn
     if(targetNode.getId() === id) return;
     if(node.getStatus() === "created") {
-      
-    } 
-    if(node instanceof ProcessNode) {
-      node.setChild(targetNode);
-      node.setStatus("created");
-    } else if(node instanceof BranchNode) {
-      if(node.getChild() === null && node.getChild2() !== null)  {
+      if(!confirm(`この操作を実行することにより、開始ノードから到達不可能なノードが発生する可能性があります。
+      到達不可能なノードは削除されてしまいますが、それでもよろしいですか?
+      ※保存ボタンをクリックするまでは、データベースに変更は反映されません。　`)) return;
+      if(node instanceof ProcessNode) {
         node.setChild(targetNode);
-        node.setStatus("created");
-      } else if(node.getChild() !== null && node.getChild2() === null) {
-        node.setChild2(targetNode);
-        node.setStatus("created");
-      // Yes/No両方ともnullの場合
+        targetNode.setParent(node);
+        let newNodes: MyNode[] = [];
+        deleteNodeByDFS(nodes[0], newNodes);
+        setNodes(newNodes);
       } else {
         setSaveNodes([node, targetNode]);
-        openModal4();
+        openModal8();
+      }
+    } else {
+      if(node instanceof ProcessNode) {
+        node.setChild(targetNode);
+        node.setStatus("created");
+      } else if(node instanceof BranchNode) {
+        if(node.getChild() === null && node.getChild2() !== null)  {
+          node.setChild(targetNode);
+          node.setStatus("created");
+        } else if(node.getChild() !== null && node.getChild2() === null) {
+          node.setChild2(targetNode);
+          node.setStatus("created");
+        // Yes/No両方ともnullの場合
+        } else {
+          setSaveNodes([node, targetNode]);
+          openModal4();
+        }
       }
     }
   }
@@ -519,6 +555,7 @@ const CustomHook = () => {
     modalIsOpen5,
     modalIsOpen6,
     modalIsOpen7,
+    modalIsOpen8,
     setProcess,
     setProcess2,
     setBranch,
@@ -531,6 +568,7 @@ const CustomHook = () => {
     closeModal5,
     closeModal6,
     closeModal7,
+    closeModal8,
     wrapSetNodeText,
     wrapSetNodeText2,
     wrapSetDetail,

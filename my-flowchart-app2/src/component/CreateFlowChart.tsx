@@ -7,6 +7,7 @@ import CreationModal3 from "./CreationModal3";
 import CreationModal4 from "./CreationModal4";
 import ConfirmFlowModal from "./ConfirmFlowModal";
 import YesOrNoModal from "./YesOrNoModal";
+import YesOrNoModal2 from "./YesOrNoModal2";
 import ChangeTextOfNodeModal from "./ChangeTextOfNodeModal";
 import Header from "./Header";
 import { useSearchParams } from "react-router-dom";
@@ -22,12 +23,14 @@ const CreateFlowChart: React.FC = () => {
     modalIsOpen5,
     modalIsOpen6,
     modalIsOpen7,
+    modalIsOpen8,
     closeModal,
     closeModal3,
     closeModal4,
     closeModal5,
     closeModal6,
     closeModal7,
+    closeModal8,
     wrapSetNodeText,
     setProcess,
     setBranch,
@@ -136,6 +139,12 @@ const CreateFlowChart: React.FC = () => {
       <YesOrNoModal
         modalIsOpen4={modalIsOpen4}
         closeModal4={closeModal4}
+        setYes={setYes}
+        setNo={setNo}
+      />
+      <YesOrNoModal2
+        modalIsOpen8={modalIsOpen8}
+        closeModal8={closeModal8}
         setYes={setYes}
         setNo={setNo}
       />
