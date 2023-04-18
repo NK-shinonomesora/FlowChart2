@@ -166,13 +166,6 @@ const CreateFlowChart: React.FC = () => {
         保存
       </button>
     </div>
-    <div>
-      <button
-        onClick={() => openModal3()}
-      >
-        フローを順に確認する
-      </button>
-    </div>
     <div id="title-input-box">
       <label id="title-label">Title</label>
       <input
@@ -249,6 +242,15 @@ const CreateFlowChart: React.FC = () => {
                     }
                   }
                 >Delete Nodes
+                </p>
+                <p
+                  onClick={(e) => {
+                      e.stopPropagation();
+                      displayContextMenu(`${i}`);
+                      openModal3(node);
+                    }
+                  }
+                >Confirm Flow from here
                 </p>
             </div>
           </div>

@@ -82,8 +82,8 @@ const CustomHook = () => {
     }
   }
 
-  const openModal3 = () => {
-    setDisplayedNode(nodes[0]);
+  const openModal3 = (node: MyNode) => {
+    setDisplayedNode(node);
     setIsOpen3(true);
   }
 
