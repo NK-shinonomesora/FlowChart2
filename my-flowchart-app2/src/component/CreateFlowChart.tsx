@@ -12,6 +12,7 @@ import ChangeTextOfNodeModal from "./ChangeTextOfNodeModal";
 import Header from "./Header";
 import { useSearchParams } from "react-router-dom";
 import StartNode from "../class/StartNode";
+import Message from "./Message";
 
 const CreateFlowChart: React.FC = () => {
   const {
@@ -81,6 +82,7 @@ const CreateFlowChart: React.FC = () => {
   return (
     <>
     <Header />
+    <Message />
     <div id="root">
       <CreationModal
         modalIsOpen={ modalIsOpen }

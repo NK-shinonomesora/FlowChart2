@@ -1,9 +1,9 @@
 interface MyAPI {
-  saveFlowChart: (title: string, nodes: MyNode[]) => void
+  saveFlowChart: (title: string, nodes: MyNode[]) => string[] | "fail"
   selectAllTitles: () => Title[]
   selectTitleById: (id: string) => Title
   selectNodesByTitleId: (titleId: string) => NodePropertyAfterSavedToDB[]
-  updateFlowChart: (title: string, titleId: string, nodes: MyNode[]) => void
+  updateFlowChart: (title: string, titleId: string, nodes: MyNode[]) => "success" | "fail"
 }
 
 interface Window {

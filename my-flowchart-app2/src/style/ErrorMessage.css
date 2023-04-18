@@ -1,0 +1,16 @@
+#error-message-box {
+  height: 40px;
+  background-color:pink;
+}
+
+#error-message  {
+  width: 700px;
+  margin: 0 auto;
+}
+
+#error-message-text {
+  text-align: center;
+  font-size: medium;
+  padding-top: 10px;
+  color: crimson;
+} 

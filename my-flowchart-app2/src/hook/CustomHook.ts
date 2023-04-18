@@ -403,10 +403,25 @@ const CustomHook = () => {
   }
 
   const saveFlowChart = async () => {
+    const elem = document.getElementById("success-message-box");
+    const elem2 = document.getElementById("error-message-box");
+    elem.style.display = "none";
+    elem2.style.display = "none";
     if(titleId === "") {
-      await window.myAPI.saveFlowChart(title, nodes);
+      const [result, title_id] = await window.myAPI.saveFlowChart(title, nodes);
+      if(result === "success") {
+        elem.style.display = "block";
+        setTitleId(title_id);
+      } else {
+        elem2.style.display = "block";
+      }
     } else {
-      await window.myAPI.updateFlowChart(title, titleId, nodes);
+      const result = await window.myAPI.updateFlowChart(title, titleId, nodes);
+      if(result === "success") {
+        elem.style.display = "block";
+      } else {
+        elem2.style.display = "block";
+      }
     }
   }
 

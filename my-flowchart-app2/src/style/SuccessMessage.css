@@ -1,0 +1,15 @@
+#success-message-box {
+  height: 40px;
+  background-color: cyan;
+}
+
+#success-message  {
+  width:500px;
+  margin: 0 auto;
+}
+
+#success-message-text {
+  text-align: center;
+  font-size: medium;
+  padding-top: 10px;
+} 

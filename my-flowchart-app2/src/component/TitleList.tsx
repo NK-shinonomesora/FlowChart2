@@ -23,10 +23,9 @@ const TitleList: React.FC = () => {
     <div id="title-list-box">
       {
         titles.map((title, i) => (
-          <div id="title-list">
+          <div key={i} id="title-list">
             <div id="center2">
               <Link
-                key={i}
                 to={`createFlowChart?id=${title.id}`}
               >
                 <p>{title.title}</p>
