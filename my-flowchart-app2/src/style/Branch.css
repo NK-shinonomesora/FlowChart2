@@ -1,17 +1,18 @@
 #branch-box {
-  width: 300px;
+  width: 200px;
   height: 100px;
   position: relative;
-  margin: 0 0 0 20px;
+  margin: 0 35px 0 35px;
+  z-index: -1;
 }
 
 #branch {
   font-size: small;
-  width: 140px;
-  height: 140px;
+  width: 125px;
+  height: 125px;
   position: absolute;
-  top: -5px;
-  left: 80px;
+  top: -13px;
+  left: 45px;
   transform: rotate(45deg) skew(-27deg, -27deg); /* 関数同士はスペースで空ける */
 }
 

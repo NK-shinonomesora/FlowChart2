@@ -160,9 +160,10 @@ const CreateFlowChart: React.FC = () => {
     </div>
     <div>
       <button
+        id="save-button"
         onClick={() => saveFlowChart()}
       >
-        フローチャートを保存する
+        保存
       </button>
     </div>
     <div>
@@ -172,8 +173,10 @@ const CreateFlowChart: React.FC = () => {
         フローを順に確認する
       </button>
     </div>
-    <div>
+    <div id="title-input-box">
+      <label id="title-label">Title</label>
       <input
+        id="title-input-field"
         placeholder="タイトルを入力してください。"
         onChange={(e) => wrapSetTitle(e.target.value)}
         defaultValue={title}
@@ -220,35 +223,33 @@ const CreateFlowChart: React.FC = () => {
               id={`contextmenu${i}`}
               className="contextmenu"
             >
-              <ul>
-                  <li
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        displayContextMenu(`${i}`);
-                        changeTextOfNode(node);
-                      }
+                <p
+                  onClick={(e) => {
+                      e.stopPropagation();
+                      displayContextMenu(`${i}`);
+                      changeTextOfNode(node);
                     }
-                  >テキストを変更する
-                  </li>
-                  <li
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        displayContextMenu(`${i}`);
-                        node.getStatus() === "created" && createNodeBetweenNodeAndNode(node);
-                      }
+                  }
+                >Edit Text
+                </p>
+                <p
+                  onClick={(e) => {
+                      e.stopPropagation();
+                      displayContextMenu(`${i}`);
+                      node.getStatus() === "created" && createNodeBetweenNodeAndNode(node);
                     }
-                  >このノードと次のノードの間に新規作成する
-                  </li>
-                  <li
-                    onClick={(e) => {
-                        e.stopPropagation();
-                        displayContextMenu(`${i}`);
-                        node instanceof StartNode === false && deleteNode(node);
-                      }
+                  }
+                >Insert Node
+                </p>
+                <p
+                  onClick={(e) => {
+                      e.stopPropagation();
+                      displayContextMenu(`${i}`);
+                      node instanceof StartNode === false && deleteNode(node);
                     }
-                  >ノードを削除する
-                  </li>
-              </ul>
+                  }
+                >Delete Nodes
+                </p>
             </div>
           </div>
         ))

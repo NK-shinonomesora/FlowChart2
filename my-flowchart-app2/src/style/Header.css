@@ -1,0 +1,38 @@
+#header {
+  height: 100px;
+  background: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+#title-box {
+  position: relative;
+  width: 200px;
+}
+
+#title {
+  position: absolute;
+  font-size: large;
+  width: 100%;
+  top: 40px;
+  left: 150px
+}
+
+#menu-box {
+  position: relative;
+  width: 500px;
+}
+
+
+#menu {
+  position: absolute;
+  font-size: medium;
+  width: 100%;
+  top: 40px;
+  right: 150px;
+}
+
+.menu {
+  margin-right: 70px;
+}

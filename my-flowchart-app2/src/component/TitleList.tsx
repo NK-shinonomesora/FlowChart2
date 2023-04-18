@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Header from "./Header";
 import TitleListHook from "../hook/TitleListHook";
 import { Link } from "react-router-dom";
+import '../style/TitleList.css'
 
 const TitleList: React.FC = () => {
   const {
@@ -16,19 +17,26 @@ const TitleList: React.FC = () => {
   return (
     <>
     <Header />
-    <ul>
+    <div id="center">
+      <h1 id="center-text">Titles</h1>
+    </div>
+    <div id="title-list-box">
       {
         titles.map((title, i) => (
-          <Link
-            key={i}
-            to={`createFlowChart?id=${title.id}`}
-          >
-            <li>{title.title}</li>
-          </Link>
+          <div id="title-list">
+            <div id="center2">
+              <Link
+                key={i}
+                to={`createFlowChart?id=${title.id}`}
+              >
+                <p>{title.title}</p>
+              </Link>
+            </div>
+          </div>
           
         ))
       }
-    </ul>
+    </div>
     </>
   )
 }

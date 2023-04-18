@@ -9,15 +9,66 @@
 }
 
 .contextmenu{
-  height: 80px;
-  /* position: absolute; */
-  /* left: 10px; */
-  /* top: 10px; */
-  border: 1px solid #000;
-  background-color: #fff;
-  margin-left: -5px;
+  height: 70px;
+  box-shadow: 0px 0px 15px 0px rgba(98,98,98,0.8); /*影の指定*/
+  padding:10px;
+  margin-left: -35px;
+  background-color: azure;
 }
-.contextmenu li{
+.contextmenu p{
   font-size: x-small;
   cursor: pointer;
+  margin-bottom: 7px;
+  margin-left: 3px;
+  margin-right: 3px;
+  border-bottom: 1px solid black;
+}
+
+.contextmenu p:hover {
+  background-color:chartreuse;
+}
+
+#save-button {
+  position:fixed;
+  right:50px;
+  bottom:50px;
+  transition:1s;
+  opacity:0.7;
+  color: #fff;
+  background-color: #eb6100;
+  -webkit-box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  line-height: 100px;
+  width: 100px;
+  height: 100px;
+  padding: 0;
+  cursor: pointer;
+}
+
+#title-input-box {
+  width:500px;
+  margin: 50px auto 0;
+  text-align: center;
+}
+
+#title-label {
+  display: block;
+}
+
+#title-input-field {
+  height: 2.4em;
+  width: 100%;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc inset;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#title-input-field:hover {
+  outline: 0;
+  box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
 }
