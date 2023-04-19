@@ -506,7 +506,12 @@ const CustomHook = () => {
 
   const displayContextMenu = (i: string) => {
     const elem = document.getElementById(`contextmenu${i}`);
-    elem.style.display === "none" ? elem.style.display = "block" : elem.style.display = "none";
+    elem.style.display = "block";
+  }
+
+  const unDisplayContextMenu = (i: string)  => {
+    const elem = document.getElementById(`contextmenu${i}`);
+    elem.style.display = "none";
   }
 
   const changeTextOfNode = (node: MyNode) => {
@@ -612,6 +617,7 @@ const CustomHook = () => {
     changeTextOfNode,
     createNodeBetweenNodeAndNode,
     deleteNode,
+    unDisplayContextMenu,
   }
 }
 

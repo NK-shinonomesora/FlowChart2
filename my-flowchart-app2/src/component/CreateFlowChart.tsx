@@ -66,6 +66,7 @@ const CreateFlowChart: React.FC = () => {
     changeTextOfNode,
     createNodeBetweenNodeAndNode,
     deleteNode,
+    unDisplayContextMenu,
   } = CustomHook();
 
   const [searchParams] = useSearchParams();
@@ -187,10 +188,16 @@ const CreateFlowChart: React.FC = () => {
             id="event-box"
             key={i}
             draggable="true"
-            onClick={() => openModal(node)}
-            onContextMenu={() => displayContextMenu(`${i}`)}
-            onMouseOver={() => showLinkNodes(node)}
-            onMouseLeave={() => unShowLinkNodes(node)}
+            onMouseOver={() => {
+                displayContextMenu(`${i}`)
+                showLinkNodes(node);
+              }
+            }
+            onMouseLeave={() => {
+                unDisplayContextMenu(`${i}`);
+                unShowLinkNodes(node);
+              }
+            }
             onDragStart={(e) => e.dataTransfer.setData('text/plain', node.getId())}
             onDragOver={(e) => {
               e.preventDefault();
@@ -221,40 +228,39 @@ const CreateFlowChart: React.FC = () => {
               className="contextmenu"
             >
                 <p
-                  onClick={(e) => {
-                      e.stopPropagation();
-                      displayContextMenu(`${i}`);
+                  onClick={() => {
+                      openModal(node);
+                    }
+                  }
+                >A
+                </p>
+                <p
+                  onClick={() => {
                       changeTextOfNode(node);
                     }
                   }
-                >Edit Text
+                >E
                 </p>
                 <p
-                  onClick={(e) => {
-                      e.stopPropagation();
-                      displayContextMenu(`${i}`);
+                  onClick={() => {
                       node.getStatus() === "created" && createNodeBetweenNodeAndNode(node);
                     }
                   }
-                >Insert Node
+                >I
                 </p>
                 <p
-                  onClick={(e) => {
-                      e.stopPropagation();
-                      displayContextMenu(`${i}`);
+                  onClick={() => {
                       node instanceof StartNode === false && deleteNode(node);
                     }
                   }
-                >Delete Nodes
+                >D
                 </p>
                 <p
-                  onClick={(e) => {
-                      e.stopPropagation();
-                      displayContextMenu(`${i}`);
+                  onClick={() => {
                       openModal3(node);
                     }
                   }
-                >Confirm Flow from here
+                >C
                 </p>
             </div>
           </div>
