@@ -8,4 +8,5 @@ contextBridge.exposeInMainWorld('myAPI', {
   selectTitleById: (id: string) => ipcRenderer.invoke('selectTitleById', id),
   selectNodesByTitleId: (titleId: string) => ipcRenderer.invoke('selectNodesByTitleId', titleId),
   updateFlowChart: (title: string, titleId: string, nodes: MyNode[]) => ipcRenderer.invoke('updateFlowChart', title, titleId, nodes),
+  deleteTitleAndNodesByTitleId: (titleId: string) => ipcRenderer.invoke('deleteTitleAndNodesByTitleId', titleId),
 });

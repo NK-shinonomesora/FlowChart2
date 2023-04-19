@@ -91,11 +91,33 @@ export default class Table extends MyDatabase {
     }
   }
 
+  public async deleteTitleById(titleId: string) {
+    try {
+      await this.dbRun(`DELETE FROM title WHERE id = "${titleId}"`);
+    } catch(err) {
+      throw new Error(err);
+    }
+  }
+
   public async deleteNodesByTitleId(titleId: string) {
     try {
       await this.dbRun(`DELETE FROM node WHERE title_id = "${titleId}"`);
     } catch(err) {
       throw new Error(err);
+    }
+  }
+
+  public async deleteTitleAndNodesByTitleId(titleId: string) {
+    try {
+      await this.dbRun('BEGIN TRANSACTION');
+      await this.deleteNodesByTitleId(titleId);
+      await this.deleteTitleById(titleId);
+      await this.dbRun('COMMIT TRANSACTION');
+      return "success";
+    } catch(err) {
+      this.dbRun('ROLLBACK TRANSACTION');
+      console.log(err);
+      return "fail";
     }
   }
 }

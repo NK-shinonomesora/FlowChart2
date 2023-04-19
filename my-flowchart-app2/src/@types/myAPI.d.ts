@@ -4,6 +4,7 @@ interface MyAPI {
   selectTitleById: (id: string) => Title
   selectNodesByTitleId: (titleId: string) => NodePropertyAfterSavedToDB[]
   updateFlowChart: (title: string, titleId: string, nodes: MyNode[]) => "success" | "fail"
+  deleteTitleAndNodesByTitleId: (titleId: string) => "success" | "fail"
 }
 
 interface Window {

@@ -26,6 +26,7 @@ const createWindow = (): void => {
   ipcMain.handle('selectTitleById', (e, id: string) => new Table().selectTitleById(id));
   ipcMain.handle('selectNodesByTitleId', (e, titleId: string) => new Table().selectNodesByTitleId(titleId));
   ipcMain.handle('updateFlowChart', (e, title: string, titleId: string, nodes: NodeProperty[]) => new Table().updateFlowChart(e, title, titleId, nodes));
+  ipcMain.handle('deleteTitleAndNodesByTitleId', (e, titleId: string) => new Table().deleteTitleAndNodesByTitleId(titleId));
 
   // and load the index.html of the app.
   mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);

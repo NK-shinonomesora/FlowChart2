@@ -83,7 +83,10 @@ const CreateFlowChart: React.FC = () => {
     <>
     <div id="root">
     <Header />
-    <Message />
+    <Message 
+      successMessage={`保存に成功しました。`}
+      errorMessage={`保存に失敗しました。もう一度、保存ボタンをクリックしてみてください。`}
+    />
       <CreationModal
         modalIsOpen={ modalIsOpen }
         closeModal={ closeModal }
