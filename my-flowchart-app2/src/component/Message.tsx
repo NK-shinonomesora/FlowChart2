@@ -1,18 +1,28 @@
 import React from "react";
-import SuccessMessage from "./SuccessMessage";
-import ErrorMessage from "./ErrorMessage";
+import '../style/Message.css';
 
 interface MessageProp {
-  successMessage: string
-  errorMessage: string
+  message: string
+  color: string
+  background: string
 }
 
-const Message: React.FC<MessageProp> = ({ successMessage, errorMessage }) => {
+const Message: React.FC<MessageProp> = ({ message, color, background }) => {
   return (
-    <>
-    <SuccessMessage message={successMessage} />
-    <ErrorMessage message={errorMessage} />
-    </>
+    <div
+      id="message-box"
+      style={{ display: "none", background: background }}
+    >
+      <div
+        id="message"
+      >
+        <p
+          id="message-text"
+          style={{ color: color }}
+        >{message}
+        </p>
+      </div>
+    </div>
   )
 }
 

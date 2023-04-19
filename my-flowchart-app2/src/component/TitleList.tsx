@@ -12,6 +12,9 @@ const TitleList: React.FC = () => {
     displayMenu,
     unDisplayMenu,
     deleteTitleAndNodesByTitleId,
+    message,
+    color,
+    background,
   } = TitleListHook();
 
   useEffect(() => {
@@ -22,8 +25,9 @@ const TitleList: React.FC = () => {
     <>
     <Header />
     <Message 
-      successMessage={`削除に成功しました。`}
-      errorMessage={`削除に失敗しました。もう一度、実行してみてください。`}
+      message={message}
+      color={color}
+      background={background}
     />
     <div id="center">
       <h1 id="center-text">Titles</h1>

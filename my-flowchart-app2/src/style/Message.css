@@ -1,0 +1,13 @@
+#message-box {
+  height: 40px;
+}
+
+#message  {
+  margin: 0 auto;
+}
+
+#message-text {
+  text-align: center;
+  font-size: medium;
+  padding-top: 10px;
+} 

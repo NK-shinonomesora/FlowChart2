@@ -29,6 +29,9 @@ const CustomHook = () => {
   const [whichNode2, setWhichNode2] = useState<"process" | "branch" | "noCheck">("noCheck");
   const [yesOrNo, setYesOrNo] = useState<"yes" | "no" | "noCheck">("noCheck");
   const [yesOrNo2, setYesOrNo2] = useState<"yes" | "no" | "noCheck">("noCheck");
+  const [message, setMessage] = useState<string>("");
+  const [color, setColor] = useState<string>("");
+  const [background, setBackground] = useState<string>("");
 
   const resetStates = () => {
     setNodeText("");
@@ -38,6 +41,10 @@ const CustomHook = () => {
     setWhichNode("noCheck");
     setWhichNode2("noCheck");
     setYesOrNo("noCheck");
+    setMessage("");
+    setColor("");
+    setBackground("");
+    unDisplayMessage();
   }
 
   const setProcess = () => {
@@ -402,25 +409,35 @@ const CustomHook = () => {
     return node;
   }
 
-  const saveFlowChart = async () => {
-    const elem = document.getElementById("success-message-box");
-    const elem2 = document.getElementById("error-message-box");
+  const unDisplayMessage = () => {
+    const elem = document.getElementById("message-box");
     elem.style.display = "none";
-    elem2.style.display = "none";
+  }
+
+  const displayMessage = (text: string, color: string, background: string) => {
+    const elem = document.getElementById("message-box");
+    elem.style.display = "block";
+    setMessage(text);
+    setColor(color);
+    setBackground(background);
+  }
+
+  const saveFlowChart = async () => {
+    unDisplayMessage();
     if(titleId === "") {
       const [result, title_id] = await window.myAPI.saveFlowChart(title, nodes);
       if(result === "success") {
-        elem.style.display = "block";
+        displayMessage(`保存に成功しました`, "black", "cyan");
         setTitleId(title_id);
       } else {
-        elem2.style.display = "block";
+        displayMessage(`保存に失敗しました。もう一度、保存ボタンをクリックしてみてください`, "crimson", "pink");
       }
     } else {
       const result = await window.myAPI.updateFlowChart(title, titleId, nodes);
       if(result === "success") {
-        elem.style.display = "block";
+        displayMessage(`更新に成功しました`, "black", "cyan");
       } else {
-        elem2.style.display = "block";
+        displayMessage(`更新に失敗しました。もう一度、保存ボタンをクリックしてみてください`, "crimson", "pink");
       }
     }
   }
@@ -618,6 +635,9 @@ const CustomHook = () => {
     createNodeBetweenNodeAndNode,
     deleteNode,
     unDisplayContextMenu,
+    message,
+    color,
+    background,
   }
 }
 

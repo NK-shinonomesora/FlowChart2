@@ -67,6 +67,9 @@ const CreateFlowChart: React.FC = () => {
     createNodeBetweenNodeAndNode,
     deleteNode,
     unDisplayContextMenu,
+    message,
+    color,
+    background,
   } = CustomHook();
 
   const [searchParams] = useSearchParams();
@@ -85,8 +88,9 @@ const CreateFlowChart: React.FC = () => {
     <div id="root">
     <Header />
     <Message 
-      successMessage={`保存に成功しました。`}
-      errorMessage={`保存に失敗しました。もう一度、保存ボタンをクリックしてみてください。`}
+      message={message}
+      color={color}
+      background={background}
     />
       <CreationModal
         modalIsOpen={ modalIsOpen }
