@@ -1,0 +1,57 @@
+.confirm-flow-modal-box {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.confirm-flow-modal-text-box {
+  position: relative;
+  margin: 2em 0;
+  padding: 0.5em 1em;
+  border: solid 3px #62c1ce;
+}
+
+.confirm-flow-modal-text-box .box-title {
+  position: absolute;
+  display: inline-block;
+  top: -27px;
+  left: -3px;
+  padding: 0 9px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 17px;
+  background: #62c1ce;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 5px 2px 0 0;
+}
+
+.confirm-flow-modal-detail-box {
+  position: relative;
+  margin: 4em 0;
+  padding: 0.5em 1em;
+  border: solid 2px #62c1ce;
+  height: 300px;
+}
+
+.confirm-flow-modal-detail-box .box-title {
+  position: absolute;
+  display: inline-block;
+  top: -27px;
+  left: -3px;
+  padding: 0 9px;
+  height: 25px;
+  line-height: 25px;
+  font-size: 17px;
+  background: #62c1ce;
+  color: #ffffff;
+  font-weight: bold;
+  border-radius: 5px 2px 0 0;
+}
+
+.confirm-flow-modal-button-box {
+  display: flex;
+}
+
+.confirm-flow-modal-button-box div {
+  margin-right: 40px;
+}

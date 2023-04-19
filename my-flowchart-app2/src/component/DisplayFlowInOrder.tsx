@@ -9,10 +9,16 @@ interface DisplayFlowInOrderProp {
 const DisplayFlowInOrder: React.FC<DisplayFlowInOrderProp> = ({ node }) => {
   return (
     <>
-    <p>{node.getText()}</p>
-    <p>
-      { node instanceof ProcessNode && node.getDetail()}
-    </p>
+    <div className="confirm-flow-modal-text-box">
+      <span className="box-title">フロー内容</span>
+      <p>{node.getText()}</p>
+    </div>
+    <div className="confirm-flow-modal-detail-box">
+      <span className="box-title">詳細</span>
+      <p>
+        { node instanceof ProcessNode && node.getDetail()}
+      </p>
+    </div>
     </>
   )
 }
