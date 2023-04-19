@@ -1,0 +1,44 @@
+#creation-modal-box {
+  margin: 20px auto;
+  text-align: center;
+  /* border-radius: 103px;
+  background-color: rgba(100, green, rgb(0, 234, 255), alpha);
+  text-align: center; */
+}
+
+#creation-modal-box-which-node-box {
+  margin-bottom: 20px;
+}
+
+#creation-modal-box-which-node-box h2 {
+  font-size: larger;
+  margin-bottom: 10px;
+}
+
+#creation-modal-box-text-box {
+  margin-bottom: 20px;
+}
+
+#creation-modal-box-text-field {
+  height: 2.4em;
+  width: 400px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc inset;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#creation-modal-box-detail-field {
+  height: 200px;
+  width: 400px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc inset;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}

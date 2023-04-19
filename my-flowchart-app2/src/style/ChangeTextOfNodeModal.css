@@ -1,0 +1,51 @@
+.change-text-of-node-modal-box {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.change-text-of-node-modal-which-node-box {
+  margin-bottom: 20px;
+}
+
+.change-text-of-node-modal-which-node-box h3 {
+  font-size: larger;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.change-text-of-node-modal-text-box {
+  margin-bottom: 20px;
+}
+
+.change-text-of-node-modal-box-text-field {
+  height: 2.4em;
+  width: 400px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc inset;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.change-text-of-node-modal-detail-box {
+  margin-bottom: 20px;
+}
+
+.change-text-of-node-modal-box-detail-field {
+  height: 200px;
+  width: 400px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: none;
+  box-shadow: 0 0 0 1px #ccc inset;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.change-text-of-node-modal-box2 {
+  margin: 20px auto;
+  text-align: center;
+}

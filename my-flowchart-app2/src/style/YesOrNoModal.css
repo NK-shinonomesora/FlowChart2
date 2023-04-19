@@ -1,0 +1,19 @@
+.yes-or-no-modal-box {
+  margin: 20px auto;
+  text-align: center;
+}
+
+.yes-or-no-modal-which-node-box {
+  margin-bottom: 20px;
+}
+
+.yes-or-no-modal-which-node-box h3 {
+  font-size: larger;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.yes-or-no-modal-box2 {
+  margin: 20px auto;
+  text-align: center;
+}

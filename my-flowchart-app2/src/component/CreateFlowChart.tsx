@@ -81,9 +81,9 @@ const CreateFlowChart: React.FC = () => {
 
   return (
     <>
+    <div id="root">
     <Header />
     <Message />
-    <div id="root">
       <CreationModal
         modalIsOpen={ modalIsOpen }
         closeModal={ closeModal }
@@ -159,7 +159,6 @@ const CreateFlowChart: React.FC = () => {
         wrapSetDetail={wrapSetDetail}
         whichNode={whichNode}
       />
-    </div>
     <div>
       <button
         id="save-button"
@@ -258,6 +257,7 @@ const CreateFlowChart: React.FC = () => {
           </div>
         ))
       }
+    </div>
     </div>
     </>
   )

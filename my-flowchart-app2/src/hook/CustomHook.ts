@@ -526,10 +526,10 @@ const CustomHook = () => {
 
   const createNodeBetweenNodeAndNode = (node: MyNode) => {
     setParentNode(node);
-    if(node instanceof ProcessNode) {
-      openModal6();
-    } else {
+    if(node instanceof BranchNode) {
       openModal7();
+    } else {
+      openModal6();
     }
   }
 
