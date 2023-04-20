@@ -22,5 +22,27 @@ export default abstract class MyDatabase {
               );
           });
       }
+      this.tableCreate();
+  }
+
+  private async tableCreate()  {
+    await this.dbRun(`CREATE TABLE if not exists 'title' (
+        id TEXT PRIMARY KEY NOT NULL,
+        title TEXT NOT NULL
+      )`);
+
+    await this.dbRun(`PRAGMA foreign_keys = ON`);
+    await this.dbRun(`CREATE TABLE if not exists 'node' (
+        id TEXT PRIMARY KEY NOT NULL,
+        text TEXT NOT NULL,
+        detail TEXT,
+        parent TEXT,
+        child TEXT,
+        child2 TEXT,
+        status TEXT NOT NULL CHECK(status = 'created' or status = 'notCreated'),
+        type TEXT NOT NULL CHECK(type = 'start' or type = 'process' or type = 'branch'),
+        title_id TEXT,
+        foreign key (title_id) references title(id)
+      )`);
   }
 }
