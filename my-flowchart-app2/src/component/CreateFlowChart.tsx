@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from "react";
+import React, { useEffect } from "react";
 import CustomHook from "../hook/CustomHook";
 import '../style/CreateFlowChart.css';
 import CreationModal from "./CreationModal";
@@ -13,6 +13,11 @@ import Header from "./Header";
 import { useSearchParams } from "react-router-dom";
 import StartNode from "../class/StartNode";
 import Message from "./Message";
+import { BsTrash } from "react-icons/bs";
+import { AiOutlinePlusCircle } from "react-icons/ai";
+import { CiEdit } from "react-icons/ci";
+import { SiQuicklook } from "react-icons/si";
+import { RiInsertColumnRight } from "react-icons/ri";
 
 const CreateFlowChart: React.FC = () => {
   const {
@@ -239,7 +244,7 @@ const CreateFlowChart: React.FC = () => {
                       openModal(node);
                     }
                   }
-                >A
+                ><AiOutlinePlusCircle size='1.2em'></AiOutlinePlusCircle>
                 </p>
               }
               {
@@ -250,7 +255,7 @@ const CreateFlowChart: React.FC = () => {
                       changeTextOfNode(node);
                     }
                   }
-                >E
+                ><CiEdit size='1.2em'></CiEdit>
                 </p>
               }
               {
@@ -261,7 +266,7 @@ const CreateFlowChart: React.FC = () => {
                       createNodeBetweenNodeAndNode(node);
                     }
                   }
-                >I
+                ><RiInsertColumnRight size='1.2em'></RiInsertColumnRight>
                 </p>
               }
               {
@@ -272,7 +277,7 @@ const CreateFlowChart: React.FC = () => {
                       deleteNode(node);
                     }
                   }
-                >D
+                ><BsTrash size='1.2em'></BsTrash>
                 </p>
               }
                 <p
@@ -280,7 +285,7 @@ const CreateFlowChart: React.FC = () => {
                       openModal3(node);
                     }
                   }
-                >C
+                ><SiQuicklook size='1.2em'></SiQuicklook>
                 </p>
             </div>
           </div>

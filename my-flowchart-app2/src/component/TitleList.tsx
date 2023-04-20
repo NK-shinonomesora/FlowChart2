@@ -3,7 +3,8 @@ import Header from "./Header";
 import Message from "./Message";
 import TitleListHook from "../hook/TitleListHook";
 import { Link } from "react-router-dom";
-import '../style/TitleList.css'
+import '../style/TitleList.css';
+import { BsTrash } from "react-icons/bs";
 
 const TitleList: React.FC = () => {
   const {
@@ -60,7 +61,7 @@ const TitleList: React.FC = () => {
             <p
               onClick={() => deleteTitleAndNodesByTitleId(title.id)}
             >
-              Delete
+              <BsTrash size='1.2em'></BsTrash>
             </p>
           </div>
           </Fragment>
