@@ -80,7 +80,6 @@ const CustomHook = () => {
   }
 
   const openModal = (node: MyNode) => {
-    if(node.getStatus() === "created") return;
     setParentNode(node);
     if(node instanceof BranchNode) {
       setIsOpen2(true);
@@ -534,7 +533,6 @@ const CustomHook = () => {
   }
 
   const changeTextOfNode = (node: MyNode) => {
-    if(node instanceof StartNode) return;
     setTempNode(node);
     if(node instanceof ProcessNode) {
       setNodeText(node.getText());

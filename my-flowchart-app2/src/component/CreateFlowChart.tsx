@@ -231,6 +231,9 @@ const CreateFlowChart: React.FC = () => {
               id={`contextmenu${i}`}
               className="contextmenu"
             >
+              {
+                node.getStatus() === "notCreated"
+                &&
                 <p
                   onClick={() => {
                       openModal(node);
@@ -238,6 +241,10 @@ const CreateFlowChart: React.FC = () => {
                   }
                 >A
                 </p>
+              }
+              {
+                node instanceof StartNode === false
+                &&
                 <p
                   onClick={() => {
                       changeTextOfNode(node);
@@ -245,20 +252,29 @@ const CreateFlowChart: React.FC = () => {
                   }
                 >E
                 </p>
+              }
+              {
+                node.getStatus() === "created"
+                &&
                 <p
                   onClick={() => {
-                      node.getStatus() === "created" && createNodeBetweenNodeAndNode(node);
+                      createNodeBetweenNodeAndNode(node);
                     }
                   }
                 >I
                 </p>
+              }
+              {
+                node instanceof StartNode === false
+                &&
                 <p
                   onClick={() => {
-                      node instanceof StartNode === false && deleteNode(node);
+                      deleteNode(node);
                     }
                   }
                 >D
                 </p>
+              }
                 <p
                   onClick={() => {
                       openModal3(node);
