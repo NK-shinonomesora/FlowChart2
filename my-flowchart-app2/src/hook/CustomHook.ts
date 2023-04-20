@@ -80,6 +80,7 @@ const CustomHook = () => {
   }
 
   const openModal = (node: MyNode) => {
+    resetStates();
     setParentNode(node);
     if(node instanceof BranchNode) {
       setIsOpen2(true);
@@ -89,27 +90,33 @@ const CustomHook = () => {
   }
 
   const openModal3 = (node: MyNode) => {
+    resetStates();
     setDisplayedNode(node);
     setIsOpen3(true);
   }
 
   const openModal4 = () => {
+    resetStates();
     setIsOpen4(true);
   }
 
   const openModal5 = () => {
+    resetStates();
     setIsOpen5(true);
   }
 
   const openModal6 = () => {
+    resetStates();
     setIsOpen6(true);
   }
 
   const openModal7 = () => {
+    resetStates();
     setIsOpen7(true);
   }
 
   const openModal8 = () => {
+    resetStates();
     setIsOpen8(true);
   }
   
@@ -131,13 +138,11 @@ const CustomHook = () => {
       }
     }
     isBranch ? setIsOpen2(false) : setIsOpen(false);
-    resetStates();
   }
 
   const closeModal3 = () => {
     setDisplayedNode(nodes[0]);
     setIsOpen3(false);
-    resetStates();
   }
 
   const closeModal4 = () => {
@@ -150,7 +155,7 @@ const CustomHook = () => {
       (node as BranchNode).setChild2(targetNode);
     }
     setIsOpen4(false);
-    resetStates();
+    displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
   }
 
   const closeModal5 = () => {
@@ -158,7 +163,6 @@ const CustomHook = () => {
     tempNode.setText(nodeText);
     if(tempNode instanceof ProcessNode) tempNode.setDetail(detail);
     setNodes(nodes.concat());
-    resetStates();
   }
 
   const closeModal6 = () => {
@@ -182,7 +186,6 @@ const CustomHook = () => {
       }
     }
     setIsOpen6(false);
-    resetStates();
   }
 
   const closeModal7 = () => {
@@ -225,7 +228,6 @@ const CustomHook = () => {
       }
     }
     setIsOpen7(false);
-    resetStates();
   }
 
   const closeModal8 = () => {
@@ -243,7 +245,7 @@ const CustomHook = () => {
     let newNodes: MyNode[] = [];
     deleteNodeByDFS(nodes[0], newNodes);
     setNodes(newNodes);
-    resetStates();
+    displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
   }
 
   const wrapSetNodeText = (text: string) => {
@@ -362,7 +364,10 @@ const CustomHook = () => {
   const linkNodes = (id: string, targetNode: MyNode) => {
     const node = getNodeById(id);
     //もし自分自身にドロップしたらすぐにreturn
-    if(targetNode.getId() === id) return;
+    if(targetNode.getId() === id) {
+      displayMessage(`自分自身に接続することはできません`, "crimson", "pink");
+      return;
+    }
     if(node.getStatus() === "created") {
       if(!confirm(`この操作を実行することにより、開始ノードから到達不可能なノードが発生する可能性があります。
       到達不可能なノードは削除されてしまいますが、それでもよろしいですか?
@@ -376,18 +381,22 @@ const CustomHook = () => {
         let newNodes: MyNode[] = [];
         deleteNodeByDFS(nodes[0], newNodes);
         setNodes(newNodes);
+        displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
       }
     } else {
       if(node instanceof ProcessNode) {
         node.setChild(targetNode);
         node.setStatus("created");
+        displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
       } else if(node instanceof BranchNode) {
         if(node.getChild() === null && node.getChild2() !== null)  {
           node.setChild(targetNode);
           node.setStatus("created");
+          displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
         } else if(node.getChild() !== null && node.getChild2() === null) {
           node.setChild2(targetNode);
           node.setStatus("created");
+          displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
         // Yes/No両方ともnullの場合
         } else {
           setSaveNodes([node, targetNode]);
