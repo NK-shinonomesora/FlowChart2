@@ -1,6 +1,6 @@
 #header {
   height: 100px;
-  background: whitesmoke;
+  background-color: dimgray;
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -16,7 +16,8 @@
   font-size: large;
   width: 100%;
   top: 40px;
-  left: 150px
+  left: 150px;
+  color:white;
 }
 
 #menu-box {
@@ -35,4 +36,9 @@
 
 .menu {
   margin-right: 70px;
+}
+
+.header-link {
+  text-decoration: none;
+  color: white;
 }

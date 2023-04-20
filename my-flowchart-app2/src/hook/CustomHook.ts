@@ -367,16 +367,16 @@ const CustomHook = () => {
     if(node.getStatus() === "created") {
       if(!confirm(`この操作を実行することにより、開始ノードから到達不可能なノードが発生する可能性があります。
       到達不可能なノードは削除されてしまいますが、それでもよろしいですか?
-      ※保存ボタンをクリックするまでは、データベースに変更は反映されません。　`)) return;
-      if(node instanceof ProcessNode) {
+      ※保存ボタンをクリックするまでは、データベースに変更は反映されません。`)) return;
+      if(node instanceof BranchNode) {
+        setSaveNodes([node, targetNode]);
+        openModal8();
+      } else {
         node.setChild(targetNode);
         targetNode.setParent(node);
         let newNodes: MyNode[] = [];
         deleteNodeByDFS(nodes[0], newNodes);
         setNodes(newNodes);
-      } else {
-        setSaveNodes([node, targetNode]);
-        openModal8();
       }
     } else {
       if(node instanceof ProcessNode) {
@@ -423,6 +423,8 @@ const CustomHook = () => {
   }
 
   const saveFlowChart = async () => {
+    if(!confirm(`データベースへ保存します。
+    ※この操作は取り消せません。`)) return;
     unDisplayMessage();
     if(titleId === "") {
       const [result, title_id] = await window.myAPI.saveFlowChart(title, nodes);
@@ -566,6 +568,8 @@ const CustomHook = () => {
   }
 
   const deleteNode = (node: MyNode) => {
+    if(!confirm(`この操作を実行すると、このノードから接続しているノード全てが削除されますが、よろしいですか?
+    ※保存ボタンをクリックしない限り、削除結果はデータベースへ反映されません。`)) return;
     const parentNode = node.getParent();
     if(parentNode instanceof ProcessNode) {
       parentNode.setChild(null);

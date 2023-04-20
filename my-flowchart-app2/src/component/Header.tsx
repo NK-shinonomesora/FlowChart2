@@ -12,8 +12,8 @@ const Header: React.FC = () => {
       </div>
       <div id="menu-box">
         <div id="menu">
-          <span className="menu"><Link to={`/`}>Title</Link></span>
-          <span className="menu"><Link to={`/createFlowChart`}>Create</Link></span>
+          <span className="menu"><Link className="header-link" to={`/`}>Title</Link></span>
+          <span className="menu"><Link className="header-link" to={`/createFlowChart`}>Create</Link></span>
         </div>
       </div>
     </header>

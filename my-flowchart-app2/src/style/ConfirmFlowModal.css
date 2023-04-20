@@ -48,6 +48,10 @@
   border-radius: 5px 2px 0 0;
 }
 
+.confirm-flow-modal-detail-box pre {
+  text-align: left;
+}
+
 .confirm-flow-modal-button-box {
   display: flex;
 }

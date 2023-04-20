@@ -22,3 +22,8 @@
   left: 15px;
   transform: skew(25deg, 25deg) rotate(-45deg); /* 傾き・回転をリセット */
 }
+
+#branch-text-box p {
+  margin-top: 15px;
+  font-size: medium;
+}

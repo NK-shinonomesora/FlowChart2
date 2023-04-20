@@ -13,12 +13,16 @@ const DisplayFlowInOrder: React.FC<DisplayFlowInOrderProp> = ({ node }) => {
       <span className="box-title">フロー内容</span>
       <p>{node.getText()}</p>
     </div>
-    <div className="confirm-flow-modal-detail-box">
-      <span className="box-title">詳細</span>
-      <p>
-        { node instanceof ProcessNode && node.getDetail()}
-      </p>
-    </div>
+    {
+      node instanceof ProcessNode
+      &&
+      <div className="confirm-flow-modal-detail-box">
+        <span className="box-title">詳細</span>
+        <pre>
+          {node.getDetail()}
+        </pre>
+      </div>
+    }
     </>
   )
 }

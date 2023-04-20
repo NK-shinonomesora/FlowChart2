@@ -6,4 +6,6 @@
 
 #start-text-box {
   font-size: small;
+  margin: 40px auto;
+  text-align: center;
 }

@@ -7,4 +7,6 @@
 #process-text-box {
   font-size: small;
   overflow-wrap:  break-word;
+  margin: 40px auto;
+  text-align: center;
 }
