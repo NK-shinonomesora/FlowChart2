@@ -1,0 +1,15 @@
+.what-is-this-app {
+  margin: 50px auto;
+  width: 500px;
+  text-align: center;
+  font-size: xx-large;
+}
+
+.usage-box {
+  margin: 30px auto;
+  width: 1200px;
+}
+
+.usage-box li {
+  margin-bottom: 20px;
+}
