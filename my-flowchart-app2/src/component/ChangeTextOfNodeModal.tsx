@@ -55,18 +55,18 @@ const ChangeTextOfNodeModal: React.FC<ChangeTextOfNodeModalProp> = (
     }}
       isOpen={modalIsOpen5}
       onRequestClose={() => closeModal5()}
-      contentLabel="Node作成"
+      contentLabel="Node-Create"
     >
       <div className="change-text-of-node-modal-box">
         <div className="change-text-of-node-modal-which-node-box">
-          <h3>現在のフロー内容</h3>
+          <h3>Current data</h3>
         </div>
         <div className="change-text-of-node-modal-text-box">
           <input
             className="change-text-of-node-modal-box-text-field"
             defaultValue={nodeText}
             type="text"
-            placeholder="フローの内容を入力してください。"
+            placeholder="Enter a new content"
             onChange={(e) => wrapSetNodeText(e.target.value)}
           >
           </input>
@@ -78,7 +78,7 @@ const ChangeTextOfNodeModal: React.FC<ChangeTextOfNodeModalProp> = (
             <textarea
               className="change-text-of-node-modal-box-detail-field"
               defaultValue={detail}
-              placeholder="フローの詳細を記載する場合はここへ。"
+              placeholder="Enter a new detail"
               onChange={(e) => wrapSetDetail(e.target.value)}
             >
             </textarea>
@@ -86,7 +86,7 @@ const ChangeTextOfNodeModal: React.FC<ChangeTextOfNodeModalProp> = (
         }
       </div>
       <div className="change-text-of-node-modal-box2">
-        <button onClick={() => closeModal5()}>変更</button>
+        <button onClick={() => closeModal5()}>Change</button>
       </div>
     </Modal>
   )

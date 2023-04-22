@@ -96,27 +96,22 @@ const CustomHook = () => {
   }
 
   const openModal4 = () => {
-    resetStates();
     setIsOpen4(true);
   }
 
   const openModal5 = () => {
-    resetStates();
     setIsOpen5(true);
   }
 
   const openModal6 = () => {
-    resetStates();
     setIsOpen6(true);
   }
 
   const openModal7 = () => {
-    resetStates();
     setIsOpen7(true);
   }
 
   const openModal8 = () => {
-    resetStates();
     setIsOpen8(true);
   }
   
@@ -155,7 +150,7 @@ const CustomHook = () => {
       (node as BranchNode).setChild2(targetNode);
     }
     setIsOpen4(false);
-    displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
+    displayMessage(`Connect to dropped Node.`, "black", "cyan");
   }
 
   const closeModal5 = () => {
@@ -245,7 +240,7 @@ const CustomHook = () => {
     let newNodes: MyNode[] = [];
     deleteNodeByDFS(nodes[0], newNodes);
     setNodes(newNodes);
-    displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
+    displayMessage(`Connect to dropped Node.`, "black", "cyan");
   }
 
   const wrapSetNodeText = (text: string) => {
@@ -365,13 +360,14 @@ const CustomHook = () => {
     const node = getNodeById(id);
     //もし自分自身にドロップしたらすぐにreturn
     if(targetNode.getId() === id) {
-      displayMessage(`自分自身に接続することはできません`, "crimson", "pink");
+      displayMessage(` Can't connect to itself.`, "crimson", "pink");
       return;
     }
     if(node.getStatus() === "created") {
-      if(!confirm(`この操作を実行することにより、開始ノードから到達不可能なノードが発生する可能性があります。
-      到達不可能なノードは削除されてしまいますが、それでもよろしいですか?
-      ※保存ボタンをクリックするまでは、データベースに変更は反映されません。`)) return;
+      if(!confirm(`This action may generate a Node that can't reach from the Start Node.
+      These will be deleted, is this ok? 
+      ※Unless clicking a save-button, database isn't updated.`)) return;
+      resetStates();
       if(node instanceof BranchNode) {
         setSaveNodes([node, targetNode]);
         openModal8();
@@ -381,22 +377,22 @@ const CustomHook = () => {
         let newNodes: MyNode[] = [];
         deleteNodeByDFS(nodes[0], newNodes);
         setNodes(newNodes);
-        displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
+        displayMessage(`Connect to dropped Node.`, "black", "cyan");
       }
     } else {
       if(node instanceof ProcessNode) {
         node.setChild(targetNode);
         node.setStatus("created");
-        displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
+        displayMessage(`Connect to dropped Node.`, "black", "cyan");
       } else if(node instanceof BranchNode) {
         if(node.getChild() === null && node.getChild2() !== null)  {
           node.setChild(targetNode);
           node.setStatus("created");
-          displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
+          displayMessage(`Connect to dropped Node.`, "black", "cyan");
         } else if(node.getChild() !== null && node.getChild2() === null) {
           node.setChild2(targetNode);
           node.setStatus("created");
-          displayMessage(`ドロップしたノードに接続しました`, "black", "cyan");
+          displayMessage(`Connect to dropped Node.`, "black", "cyan");
         // Yes/No両方ともnullの場合
         } else {
           setSaveNodes([node, targetNode]);
@@ -431,23 +427,23 @@ const CustomHook = () => {
   }
 
   const saveFlowChart = async () => {
-    if(!confirm(`データベースへ保存します。
-    ※この操作は取り消せません。`)) return;
+    if(!confirm(`Update database.
+    ※Warning! This action can't be undone.`)) return;
     unDisplayMessage();
     if(titleId === "") {
       const [result, title_id] = await window.myAPI.saveFlowChart(title, nodes);
       if(result === "success") {
-        displayMessage(`保存に成功しました`, "black", "cyan");
+        displayMessage(`Successfully save.`, "black", "cyan");
         setTitleId(title_id);
       } else {
-        displayMessage(`保存に失敗しました。もう一度、保存ボタンをクリックしてみてください`, "crimson", "pink");
+        displayMessage(`Unsuccessfully save. Please try again.`, "crimson", "pink");
       }
     } else {
       const result = await window.myAPI.updateFlowChart(title, titleId, nodes);
       if(result === "success") {
-        displayMessage(`更新に成功しました`, "black", "cyan");
+        displayMessage(`Successfully update.`, "black", "cyan");
       } else {
-        displayMessage(`更新に失敗しました。もう一度、保存ボタンをクリックしてみてください`, "crimson", "pink");
+        displayMessage(`Unsuccessfully update. Please try again.`, "crimson", "pink");
       }
     }
   }
@@ -542,6 +538,7 @@ const CustomHook = () => {
   }
 
   const changeTextOfNode = (node: MyNode) => {
+    resetStates();
     setTempNode(node);
     if(node instanceof ProcessNode) {
       setNodeText(node.getText());
@@ -556,6 +553,7 @@ const CustomHook = () => {
   }
 
   const createNodeBetweenNodeAndNode = (node: MyNode) => {
+    resetStates();
     setParentNode(node);
     if(node instanceof BranchNode) {
       openModal7();
@@ -575,8 +573,8 @@ const CustomHook = () => {
   }
 
   const deleteNode = (node: MyNode) => {
-    if(!confirm(`この操作を実行すると、このノードから接続しているノード全てが削除されますが、よろしいですか?
-    ※保存ボタンをクリックしない限り、削除結果はデータベースへ反映されません。`)) return;
+    if(!confirm(`This action deletes all Nodes that are connected from this Node, is it OK?
+    ※Unless clicking a save-button, database isn't updated.`)) return;
     const parentNode = node.getParent();
     if(parentNode instanceof ProcessNode) {
       parentNode.setChild(null);

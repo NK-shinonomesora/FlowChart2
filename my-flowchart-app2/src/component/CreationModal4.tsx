@@ -64,11 +64,11 @@ const CreationModal4: React.FC<CreationModal4Prop> = (
       }}
         isOpen={modalIsOpen7}
         onRequestClose={() => closeModal7()}
-        contentLabel="Node作成"
+        contentLabel="Node-Creation"
       >
         <div className="creation-modal4-box">
           <div className="creation-modal4-box-which-node-box">
-            <h3>YES/NOどちら側から接続されますか?</h3>
+            <h3>Which will be connected to a new Node, YES or NO side?</h3>
             <div>
               <span>YES</span>
               <input
@@ -85,16 +85,16 @@ const CreationModal4: React.FC<CreationModal4Prop> = (
               >
               </input>
             </div>
-            <h3>作成したいノードは?</h3>
+            <h3>Select a Node</h3>
             <div>
-              <span>処理ノード</span>
+              <span>Process Node</span>
               <input
                 type="radio"
                 name="node"
                 onClick={() => setProcess()}
               >
               </input>
-              <span>分岐ノード</span>
+              <span>Branch Node</span>
               <input
                 type="radio"
                 name="node"
@@ -107,7 +107,7 @@ const CreationModal4: React.FC<CreationModal4Prop> = (
             <input
               className="creation-modal4-box-text-field"
               type="text"
-              placeholder="フローの内容を入力してください。"
+              placeholder="Enter a content"
               onChange={(e) => wrapSetNodeText(e.target.value)}
             >
             </input>
@@ -118,7 +118,7 @@ const CreationModal4: React.FC<CreationModal4Prop> = (
             <div className="creation-modal4-box2-detail-box">
               <textarea
                 className="creation-modal4-box-detail-field"
-                placeholder="フローの詳細を記載する場合はここへ。"
+                placeholder="Enter a detail"
                 onChange={(e) => wrapSetDetail(e.target.value)}
               >
               </textarea>
@@ -130,7 +130,7 @@ const CreationModal4: React.FC<CreationModal4Prop> = (
           &&
           <div className="creation-modal4-box">
             <div className="creation-modal3-box-which-node-box">
-              <h3>YES/NOどちら側を子ノードに接続しますか?</h3>
+              <h3>Which will be connected to the child Node, YES or NO side?</h3>
               <span>YES</span>
               <input
                 type="radio"
@@ -149,7 +149,7 @@ const CreationModal4: React.FC<CreationModal4Prop> = (
         </div>
         }
         <div className="creation-modal4-box2"> 
-          <button onClick={() => closeModal7()}>作成</button>
+          <button onClick={() => closeModal7()}>Create</button>
         </div>
       </Modal>
     </div>

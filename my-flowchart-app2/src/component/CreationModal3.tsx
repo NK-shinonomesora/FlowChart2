@@ -59,20 +59,20 @@ const CreationModal3: React.FC<CreationModal3Prop> = (
     }}
       isOpen={modalIsOpen6}
       onRequestClose={() => closeModal6()}
-      contentLabel="Node作成"
+      contentLabel="Node-Creation"
     >
       <div className="creation-modal3-box">
         <div className="creation-modal3-box-which-node-box">
-          <h3>作成したいノードは?</h3>
+          <h3>Select a Node</h3>
           <div>
-            <span>処理ノード</span>
+            <span>Process Node</span>
             <input
               type="radio"
               name="node"
               onClick={() => setProcess()}
             >
             </input>
-            <span>分岐ノード</span>
+            <span>Branch Node</span>
             <input
               type="radio"
               name="node"
@@ -85,7 +85,7 @@ const CreationModal3: React.FC<CreationModal3Prop> = (
           <input
             className="creation-modal3-box-text-field"
             type="text"
-            placeholder="フローの内容を入力してください。"
+            placeholder="Enter a content。"
             onChange={(e) => wrapSetNodeText(e.target.value)}
           >
           </input>
@@ -96,7 +96,7 @@ const CreationModal3: React.FC<CreationModal3Prop> = (
           <div className="creation-modal3-box2-detail-box">
             <textarea
               className="creation-modal3-box-detail-field"
-              placeholder="フローの詳細を記載する場合はここへ。"
+              placeholder="Enter a detail"
               onChange={(e) => wrapSetDetail(e.target.value)}
             >
             </textarea>
@@ -108,7 +108,7 @@ const CreationModal3: React.FC<CreationModal3Prop> = (
         &&
         <div className="creation-modal3-box">
           <div className="creation-modal3-box-which-node-box">
-            <h3>YES/NOどちら側を子ノードに接続しますか?</h3>
+            <h3>Which will be connected to the child Node, YES or NO side?</h3>
             <span>YES</span>
             <input
               type="radio"
@@ -127,7 +127,7 @@ const CreationModal3: React.FC<CreationModal3Prop> = (
         </div>
       }
       <div className="creation-modal3-box2">
-        <button onClick={() => closeModal6()}>作成</button>
+        <button onClick={() => closeModal6()}>Create</button>
       </div>
     </Modal>
   )

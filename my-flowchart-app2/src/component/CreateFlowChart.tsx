@@ -177,14 +177,14 @@ const CreateFlowChart: React.FC = () => {
         id="save-button"
         onClick={() => saveFlowChart()}
       >
-        保存
+        Save
       </button>
     </div>
     <div id="title-input-box">
       <label id="title-label">Title</label>
       <input
         id="title-input-field"
-        placeholder="タイトルを入力してください。"
+        placeholder="Enter a title"
         onChange={(e) => wrapSetTitle(e.target.value)}
         defaultValue={title}
       >

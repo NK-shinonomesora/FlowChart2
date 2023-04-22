@@ -54,7 +54,7 @@ const YesOrNoModal2: React.FC<YesOrNoModal2Prop> = (
     >
       <div className="yes-or-no-modal-box">
         <div className="yes-or-no-modal-which-node-box">
-          <h3>Yes/Noどちらを接続しますか?</h3>
+          <h3>Which will be connected to the Node, YES or NO side?</h3>
           <div>
             <span>Yes</span>
             <input
@@ -74,7 +74,7 @@ const YesOrNoModal2: React.FC<YesOrNoModal2Prop> = (
         </div>
       </div>
       <div className="yes-or-no-modal-box2">
-        <button onClick={() => closeModal8()}>決定</button>
+        <button onClick={() => closeModal8()}>OK</button>
       </div>
     </Modal>
     </>

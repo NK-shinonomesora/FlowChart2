@@ -69,7 +69,7 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
     }}
       isOpen={modalIsOpen2}
       onRequestClose={() => closeModal()}
-      contentLabel="Node作成"
+      contentLabel="Node-Creation"
     >
       {
         (parentNode !== undefined && parentNode.getChild() === null)
@@ -77,16 +77,16 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
         <>
         <div className="creation-modal2-box">
           <div className="creation-modal2-box-which-node-box">
-            <h3>YES側に作成したいノードは?</h3>
+            <h3>Select a Node that will be connected to YES side.</h3>
             <div>
-              <span>処理ノード</span>
+              <span>Process Node</span>
               <input
                 type="radio"
                 name="node"
                 onClick={() => setProcess()}
               >
               </input>
-              <span>分岐ノード</span>
+              <span>Branch Node</span>
               <input
                 type="radio"
                 name="node"
@@ -99,7 +99,7 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
             <input
               className="creation-modal2-box-text-field"
               type="text"
-              placeholder="フローの内容を入力してください。"
+              placeholder="Enter a content"
               onChange={(e) => wrapSetNodeText(e.target.value)}
             >
             </input>
@@ -115,7 +115,7 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
           <div className="creation-modal2-box2-detail-box">
             <textarea
               className="creation-modal2-box-detail-field"
-              placeholder="フローの詳細を記載する場合はここへ。"
+              placeholder="Enter a detail"
               onChange={(e) => wrapSetDetail(e.target.value)}
             >
             </textarea>
@@ -128,16 +128,16 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
         <>
         <div className="creation-modal2-box">
           <div className="creation-modal2-box-which-node-box">
-            <h3>No側に作成したいノードは?</h3>
+            <h3>Select a Node that will be connected to NO side.</h3>
             <div>
-              <span>処理ノード</span>
+              <span>Process Node</span>
               <input
                 type="radio"
                 name="node2"
                 onClick={() => setProcess2()}
               >
               </input>
-              <span>分岐ノード</span>
+              <span>Branch Node</span>
               <input
                 type="radio"
                 name="node2"
@@ -150,7 +150,7 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
             <input
               className="creation-modal2-box-text-field"
               type="text"
-              placeholder="フローの内容を入力してください。"
+              placeholder="Enter a content"
               onChange={(e) => wrapSetNodeText2(e.target.value)}
             >
             </input>
@@ -166,7 +166,7 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
           <div className="creation-modal2-box2-detail-box">
             <textarea
               className="creation-modal2-box-detail-field"
-              placeholder="フローの詳細を記載する場合はここへ。"
+              placeholder="Enter a detail"
               onChange={(e) => wrapSetDetail2(e.target.value)}
             >
             </textarea>
@@ -175,7 +175,7 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
       }
       <div className="creation-modal2-box2">
         <div>
-          <button onClick={() => closeModal()}>登録</button>
+          <button onClick={() => closeModal()}>Create</button>
         </div>
       </div>
     </Modal>

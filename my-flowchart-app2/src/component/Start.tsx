@@ -11,7 +11,7 @@ const Start: React.FC<StartProp> = ({ color }) => {
     <>
     <div id="start" style={{ backgroundColor: color }}>
       <div id="start-text-box">
-        <p>開始</p>
+        <p>Start</p>
       </div>
     </div>
     </>

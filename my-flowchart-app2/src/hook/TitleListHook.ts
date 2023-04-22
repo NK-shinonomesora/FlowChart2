@@ -23,16 +23,16 @@ const TitleListHook = () => {
 
   const deleteTitleAndNodesByTitleId = async (titleId: string) => {
     unDisplayMessage();
-    if(!confirm(`本当に削除しても良いですか?`)) return;
+    if(!confirm(`Are you really sure that's OK?`)) return;
     const result = await window.myAPI.deleteTitleAndNodesByTitleId(titleId);
     if(result === "success") {
       const newTitles = titles.filter((title: Title, i: number) => {
         return title.id !== titleId;
       });
       setTitles(newTitles);
-      displayMessage(`削除に成功しました`, "black", "cyan");
+      displayMessage(`Deleted successfully.`, "black", "cyan");
     } else {
-      displayMessage(`削除に失敗しました。もう一度、実行してみてください`, "crimson", "pink");
+      displayMessage(`Deleted unsuccessfully. Please try again.`, "crimson", "pink");
     }
   }
 

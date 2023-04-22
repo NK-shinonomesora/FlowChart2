@@ -55,20 +55,20 @@ const CreationModal: React.FC<CreationModalProp> = (
       }}
       isOpen={modalIsOpen}
       onRequestClose={() => closeModal()}
-      contentLabel="Node作成"
+      contentLabel="Node-Creation"
     >
       <div id="creation-modal-box">
         <div id="creation-modal-box-which-node-box">
-          <h2>作成したいノードは</h2>
+          <h2>Select a Node</h2>
           <div>
-            <span>処理ノード</span>
+            <span>Process Node</span>
             <input
               type="radio"
               name="node"
               onClick={() => setProcess()}
             >
             </input>
-            <span>分岐ノード</span>
+            <span>Branch Node</span>
             <input
               type="radio"
               name="node"
@@ -81,7 +81,7 @@ const CreationModal: React.FC<CreationModalProp> = (
           <input
             id="creation-modal-box-text-field"
             type="text"
-            placeholder="フローの内容を入力してください。"
+            placeholder="Enter a content"
             onChange={(e) => wrapSetNodeText(e.target.value)}
           >
           </input>
@@ -92,14 +92,14 @@ const CreationModal: React.FC<CreationModalProp> = (
           <div>
             <textarea
               id="creation-modal-box-detail-field"
-              placeholder="フローの詳細を記載する場合はここへ。"
+              placeholder="Enter a detail"
               onChange={(e) => wrapSetDetail(e.target.value)}
             >
             </textarea>
           </div>
         }
         <div>
-          <button onClick={() => closeModal()}>作成</button>
+          <button onClick={() => closeModal()}>Create</button>
         </div>
       </div>
     </Modal>
