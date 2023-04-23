@@ -4,20 +4,9 @@ import Process from "../component/Process";
 import { Color } from "../enum/Color";
 
 export default class ProcessNode extends MyNode {
-  private detail: string;
-
   constructor(parent: MyNode | null, text: string, detail: string) {
-    super(parent, text, "process");
-    this.detail = detail;
+    super(parent, text, detail, "process");
     this.setColor(Color.Process);
-  }
-
-  public getDetail() {
-    return this.detail;
-  }
-
-  public setDetail(detail: string) {
-    this.detail = detail;
   }
 
   public displayShape(): JSX.Element {

@@ -109,7 +109,6 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
       }
       {
         (parentNode !== undefined && parentNode.getChild() === null)
-        && (whichNode === "process")
         &&
         <div className="creation-modal2-box2">
           <div className="creation-modal2-box2-detail-box">
@@ -160,7 +159,6 @@ const CreationModal2: React.FC<CreationModal2Prop> = (
       }
       {
         (parentNode !== undefined && parentNode instanceof BranchNode && (parentNode as BranchNode).getChild2() === null)
-        && (whichNode2 === "process")
         &&
         <div className="creation-modal2-box2">
           <div className="creation-modal2-box2-detail-box">

@@ -86,18 +86,14 @@ const CreationModal: React.FC<CreationModalProp> = (
           >
           </input>
         </div>
-        {
-          whichNode === "process"
-          &&
-          <div>
-            <textarea
-              id="creation-modal-box-detail-field"
-              placeholder="Enter a detail"
-              onChange={(e) => wrapSetDetail(e.target.value)}
-            >
-            </textarea>
-          </div>
-        }
+        <div>
+          <textarea
+            id="creation-modal-box-detail-field"
+            placeholder="Enter a detail"
+            onChange={(e) => wrapSetDetail(e.target.value)}
+          >
+          </textarea>
+        </div>
         <div>
           <button onClick={() => closeModal()}>Create</button>
         </div>

@@ -6,7 +6,7 @@ import BranchNode from "../class/BranchNode";
 import { Color } from "../enum/Color";
 
 const CustomHook = () => {
-  const [nodes, setNodes] = useState<MyNode[]>([new StartNode(null, "開始")]);
+  const [nodes, setNodes] = useState<MyNode[]>([new StartNode(null, "Start", "N/A")]);
   const [parentNode, setParentNode] = useState<MyNode>();
   const [tempNode, setTempNode] = useState<MyNode>();
   const [displayedNode, setDisplayedNode] = useState<MyNode>(nodes[0]);
@@ -156,7 +156,7 @@ const CustomHook = () => {
   const closeModal5 = () => {
     setIsOpen5(false);
     tempNode.setText(nodeText);
-    if(tempNode instanceof ProcessNode) tempNode.setDetail(detail);
+    if(tempNode instanceof StartNode === false) tempNode.setDetail(detail);
     setNodes(nodes.concat());
   }
 
@@ -232,10 +232,8 @@ const CustomHook = () => {
       return;
     } else if(yesOrNo === "yes") {
       node.setChild(targetNode);
-      targetNode.setParent(node);
     } else {
       (node as BranchNode).setChild2(targetNode);
-      targetNode.setParent(node);
     }
     let newNodes: MyNode[] = [];
     deleteNodeByDFS(nodes[0], newNodes);
@@ -274,7 +272,7 @@ const CustomHook = () => {
   const createNode = () => {
     const newNode = whichNode === "process"
     ? ProcessNode.createNode(parentNode, nodeText, detail)
-    : BranchNode.createNode(parentNode, nodeText);
+    : BranchNode.createNode(parentNode, nodeText, detail);
     setNodes(nodes.concat(newNode));
     return newNode;
   }
@@ -285,14 +283,14 @@ const CustomHook = () => {
     if(whichNode !== "noCheck") {
       newNode = whichNode === "process"
       ? ProcessNode.createNode(parentNode, nodeText, detail) 
-      : BranchNode.createNode(parentNode, nodeText);
+      : BranchNode.createNode(parentNode, nodeText, detail);
     } else {
       newNode = null;
     }
     if(whichNode2 !== "noCheck") {
       newNode2 = whichNode2 === "process"
       ? ProcessNode.createNode(parentNode, nodeText2, detail2) 
-      : BranchNode.createNode(parentNode, nodeText2);
+      : BranchNode.createNode(parentNode, nodeText2, detail2);
     } else {
       newNode2 = null;
     }
@@ -540,16 +538,15 @@ const CustomHook = () => {
   const changeTextOfNode = (node: MyNode) => {
     resetStates();
     setTempNode(node);
+    setNodeText(node.getText());
     if(node instanceof ProcessNode) {
-      setNodeText(node.getText());
       setDetail(node.getDetail());
       setWhichNode("process");
-      openModal5();
-    } else {
-      setNodeText(node.getText());
+    } else if(node instanceof BranchNode) {
+      setDetail(node.getDetail());
       setWhichNode("branch");
-      openModal5();
     }
+    openModal5();
   }
 
   const createNodeBetweenNodeAndNode = (node: MyNode) => {

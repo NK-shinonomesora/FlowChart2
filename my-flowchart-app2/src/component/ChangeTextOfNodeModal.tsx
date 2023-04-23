@@ -71,19 +71,15 @@ const ChangeTextOfNodeModal: React.FC<ChangeTextOfNodeModalProp> = (
           >
           </input>
         </div>
-        {
-          whichNode === "process"
-          &&
-          <div className="change-text-of-node-modal-detail-box">
-            <textarea
-              className="change-text-of-node-modal-box-detail-field"
-              defaultValue={detail}
-              placeholder="Enter a new detail"
-              onChange={(e) => wrapSetDetail(e.target.value)}
-            >
-            </textarea>
-          </div>
-        }
+        <div className="change-text-of-node-modal-detail-box">
+          <textarea
+            className="change-text-of-node-modal-box-detail-field"
+            defaultValue={detail}
+            placeholder="Enter a new detail"
+            onChange={(e) => wrapSetDetail(e.target.value)}
+          >
+          </textarea>
+        </div>
       </div>
       <div className="change-text-of-node-modal-box2">
         <button onClick={() => closeModal5()}>Change</button>

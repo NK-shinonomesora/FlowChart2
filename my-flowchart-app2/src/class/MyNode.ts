@@ -6,14 +6,16 @@ export default abstract class MyNode {
   private parent: MyNode | null;
   private child: MyNode | null = null;
   private text: string;
+  private detail: string;
   private color: Color;
   private status: "created" | "notCreated";
   public readonly type: NodeType;
 
-  constructor(parent: MyNode | null, text: string, type: NodeType) {
+  constructor(parent: MyNode | null, text: string, detail: string, type: NodeType) {
     this.id = uuidv4();
     this.parent = parent;
     this.text = text;
+    this.detail = detail;
     this.status = "notCreated";
     this.type = type;
   }
@@ -24,6 +26,10 @@ export default abstract class MyNode {
 
   public getText() {
     return this.text;
+  }
+
+  public getDetail() {
+    return this.detail;
   }
 
   public getColor() {
@@ -48,6 +54,10 @@ export default abstract class MyNode {
 
   public setText(text: string) {
     this.text = text;
+  }
+
+  public setDetail(detail: string) {
+    this.detail = detail;
   }
 
   public setColor(color: Color) {

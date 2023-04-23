@@ -112,18 +112,14 @@ const CreationModal4: React.FC<CreationModal4Prop> = (
             >
             </input>
           </div>
-          {
-            whichNode === "process"
-            &&
-            <div className="creation-modal4-box2-detail-box">
-              <textarea
-                className="creation-modal4-box-detail-field"
-                placeholder="Enter a detail"
-                onChange={(e) => wrapSetDetail(e.target.value)}
-              >
-              </textarea>
-            </div>
-          }
+          <div className="creation-modal4-box2-detail-box">
+            <textarea
+              className="creation-modal4-box-detail-field"
+              placeholder="Enter a detail"
+              onChange={(e) => wrapSetDetail(e.target.value)}
+            >
+            </textarea>
+          </div>
         </div>
         {
           whichNode === "branch"
