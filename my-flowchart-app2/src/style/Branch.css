@@ -14,6 +14,7 @@
   top: -13px;
   left: 45px;
   transform: rotate(45deg) skew(-27deg, -27deg); /* 関数同士はスペースで空ける */
+  border: 0.5px solid black;
 }
 
 #branch-text-box {

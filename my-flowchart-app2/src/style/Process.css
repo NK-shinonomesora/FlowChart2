@@ -2,6 +2,7 @@
   width: 200px;
   height: 100px;
   margin: 0 35px 0 35px;
+  border: 0.5px solid black;
 }
 
 #process-text-box {

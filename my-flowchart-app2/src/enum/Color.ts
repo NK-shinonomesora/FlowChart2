@@ -1,8 +1,8 @@
 export enum Color {
-  Start = "PapayaWhip",
-  Process = "Gainsboro",
-  Branch = "BurlyWood",
-  Parent = "Lime",
-  Child = "Fuchsia",
-  Child2 = "pink",
+  Start = "Honeydew",
+  Process = "PowderBlue",
+  Branch = "LightGoldenrodYellow",
+  Parent = "Chartreuse",
+  Child = "HotPink",
+  Child2 = "MediumPurple",
 }

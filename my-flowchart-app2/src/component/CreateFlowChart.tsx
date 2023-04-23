@@ -180,6 +180,23 @@ const CreateFlowChart: React.FC = () => {
         Save
       </button>
     </div>
+    <div id="color-info-box">
+      <div id="color-info-box2">
+        <h1>Node color info</h1>
+      </div>
+      <div id="color-info-box2">
+        <div id="lime-box"></div><p>is previous Node</p>
+      </div>
+      <div id="color-info-box2">
+        <div id="fuchsia-box"></div><p>is next or YES Node</p>
+      </div>
+      <div id="color-info-box2">
+        <div id="pink-box"></div><p>is NO Node</p>
+      </div>
+      <div id="color-info-box2">
+        <h6>If previous and next Node is same, next color has priority</h6>
+      </div>
+    </div>
     <div id="title-input-box">
       <label id="title-label">Title</label>
       <input
