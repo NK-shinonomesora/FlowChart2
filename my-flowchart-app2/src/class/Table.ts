@@ -72,7 +72,7 @@ export default class Table extends MyDatabase {
         } else {
           await this.dbRun(`
             INSERT INTO node (id, text, detail, parent, child, child2, status, type, title_id)
-            VALUES ("${node.id}", "${node.text}", "${nullVal}", "${node.parent.id}",
+            VALUES ("${node.id}", "${node.text}", "${node.detail}", "${node.parent.id}",
             "${node.child !== null ? node.child.id : nullVal}", "${node.child2 !== null ? node.child2.id : nullVal}"
             , "${node.status}", "branch", "${title_id}")
           `);
