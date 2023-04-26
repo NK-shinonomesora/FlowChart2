@@ -8,7 +8,8 @@ export default abstract class MyDatabase {
   protected dbRun;
 
   constructor() {
-      const db = new sqlite3.Database(join(__dirname, '../../flowchart'));
+      const db = new sqlite3.Database(join(process.env.HOME, '.flowChartDBFile'));
+      
       this.dbGet = promisify(db.get.bind(db));
       this.dbAll = promisify(db.all.bind(db));
       this.dbRun = function(arg: string) {
